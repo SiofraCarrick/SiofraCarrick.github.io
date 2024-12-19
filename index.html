@@ -169,6 +169,22 @@
         <div id="start-button-text">Start</div>
     </div>
     <!-- Open Applications in the Taskbar -->
+    <div id="task-container">
+        <!-- Minesweeper -->
+        <div id="minesweeper-task" class="task active-task" onclick="toggleActive('minesweeper-task', 'minesweeper')">
+            <img class="task-icon" src="./images/minesweeper.ico" />
+            <div class="task-text">
+                Minesweeper
+            </div>
+        </div>
+        <!-- Explorer -->
+        <div id="explorer-task" class="task active-task" onclick="toggleActive('explorer-task', 'explorer')">
+            <img class="task-icon" src="./images/directory_closed.ico" />
+            <div class="task-text">
+                Explorer
+            </div>
+        </div>   
+    </div>
     <!-- Notifications & Clock -->
     <div id="notification-tray">
         <img src="./images/volume.ico" id="volume-icon" />
