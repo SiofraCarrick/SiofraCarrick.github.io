@@ -1,1 +1,124 @@
-Hello
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Cool Zone </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/x-icon" href="./images/fav.ico">
+
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    
+    
+
+</head>
+
+
+<div id="app"></div>
+<script src="https://unpkg.com/webamp@1.5.0/built/webamp.bundle.min.js"></script>
+<script src="https://unpkg.com/butterchurn@2.6.7/lib/butterchurn.min.js"></script>
+<script src="https://unpkg.com/butterchurn-presets@2.4.7/lib/butterchurnPresets.min.js"></script>
+<script>
+    const app = document.getElementById("app")
+    const webamp = new Webamp({
+        initialTracks: [
+          {
+            metaData: {
+              artist: "DJ Mike Llama",
+              title: "Llama Whippin' Intro",
+            },
+            // NOTE: Your audio file must be served from the same domain as your HTML
+            // file, or served with permissive CORS HTTP headers:
+            // https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+            url: "./music/08.This Must Be The Place (Naive Melody).mp3/",
+            duration: 5.322286,
+          },
+        ],
+        __butterchurnOptions: {
+          importButterchurn: () => Promise.resolve(window.butterchurn),
+          getPresets: () => {
+            const presets = window.butterchurnPresets.getPresets();
+            return Object.keys(presets).map((name) => {
+              return {
+                name,
+                butterchurnPresetObject: presets[name],
+              };
+            });
+          },
+          butterchurnOpen: true,
+        },
+        windowLayout: {
+          main: { position: { top: 0, left: 0 } },
+          equalizer: { position: { top: 116, left: 0 } },
+          playlist: {
+            position: { top: 232, left: 0 },
+            size: { extraWidth: 0, extraHeight: 4 },
+          },
+          milkdrop: {
+            position: { top: 0, left: 275 },
+            size: { extraHeight: 12, extraWidth: 7 },
+          },
+        },
+      });
+    webamp.renderWhenReady(app);
+
+    function startTime() {
+            var today = new Date();
+            var h = today.getHours();
+            var m = today.getMinutes();
+            var p = " AM";
+            p = getPeriod(h, p);
+            m = checkTime(m);
+            h = formatTime(h);            
+            document.getElementById('clock').innerHTML =
+                h + ":" + m + p;
+                console.log(h+":" + m + p)
+            var t = setTimeout(startTime, 500);
+        }
+        function checkTime(i) {
+            if (i < 10) { i = "0" + i };
+            return i;
+        }
+        function formatTime(t) {
+            if (t > 12) {
+                t = (t - 12);
+                return t;
+            }
+            else {
+                return t;
+            }
+        }
+        function getPeriod(hr, pd) {
+            if (hr > 12) {
+                pd = " PM";
+                return pd;
+            }
+            else {
+                pd = " AM";
+                return pd;
+            }
+        }
+    </script>
+</script>
+
+<body onload="startTime()">
+    
+<div id="taskbar">
+    <!-- Start Button -->
+    <div id="start-button" onclick="showItem('start-menu')" >            
+        <img src="./images/windows.ico" id="windows-icon" />
+        <div id="start-button-text">Start</div>
+    </div>
+    <!-- Open Applications in the Taskbar -->
+    <!-- Notifications & Clock -->
+    <div id="notification-tray">
+        <img src="./images/volume.ico" id="volume-icon" />
+        <div id="clock"></div>
+    </div>
+</div>
+
+
+
+</body>
+</html>
