@@ -14,50 +14,50 @@
 
 </head>
 
-
-<div id="app"></div>
 <script src="https://unpkg.com/webamp@1.5.0/built/webamp.bundle.min.js"></script>
 <script src="https://unpkg.com/butterchurn@2.6.7/lib/butterchurn.min.js"></script>
 <script src="https://unpkg.com/butterchurn-presets@2.4.7/lib/butterchurnPresets.min.js"></script>
 <script>
-    const app = document.getElementById("app")
+   document.addEventListener("DOMContentLoaded", () => {
+    const app = document.getElementById("app");
+
+    if (!app) {
+      console.error("Webamp container #app is not found.");
+      return;
+    }
+
     const webamp = new Webamp({
-        initialTracks: [
-          {
-        
-            // NOTE: Your audio file must be served from the same domain as your HTML
-            // file, or served with permissive CORS HTTP headers:
-            // https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
-            url: "./music/Song.mp3"
-          },
-        ],
-        __butterchurnOptions: {
-          importButterchurn: () => Promise.resolve(window.butterchurn),
-          getPresets: () => {
-            const presets = window.butterchurnPresets.getPresets();
-            return Object.keys(presets).map((name) => {
-              return {
-                name,
-                butterchurnPresetObject: presets[name],
-              };
-            });
-          },
-          butterchurnOpen: true,
+      initialTracks: [
+        {
+          // Ensure the file is served properly with CORS settings if needed
+          url: "./music/Song.mp3",
         },
-        windowLayout: {
-          main: { position: { top: 0, left: 0 } },
-          equalizer: { position: { top: 116, left: 0 } },
-          playlist: {
-            position: { top: 232, left: 0 },
-            size: { extraWidth: 0, extraHeight: 4 },
-          },
-          milkdrop: {
-            position: { top: 0, left: 275 },
-            size: { extraHeight: 12, extraWidth: 7 },
-          },
+      ],
+      __butterchurnOptions: {
+        importButterchurn: () => Promise.resolve(window.butterchurn),
+        getPresets: () => {
+          const presets = window.butterchurnPresets.getPresets();
+          return Object.keys(presets).map((name) => {
+            return {
+              name,
+              butterchurnPresetObject: presets[name],
+            };
+          });
         },
-      });
+        butterchurnOpen: true,
+      },
+      windowLayout: {
+        main: { position: { top: 0, left: 0 } },
+        equalizer: { position: { top: 116, left: 0 } },
+        milkdrop: {
+          position: { top: 0, left: 275 },
+          size: { extraHeight: 12, extraWidth: 7 },
+        },
+      },
+    });
+
     webamp.renderWhenReady(app);
+  });
 
     function startTime() {
             var today = new Date();
@@ -95,10 +95,60 @@
                 return pd;
             }
         }
+
+        function showItem(id) {
+            item = document.getElementById(id);
+            if (item.style.display == 'none') {
+                item.style.display = 'block';
+            }
+            
+            else {
+                item.style.display = 'none';
+            }
+        }
     </script>
 </script>
 
 <body onload="startTime()">
+<div id="app"></div>
+ <div id="desktop">
+        <!-- My Computer -->
+        <div class="application">
+            <img src="./images/computer_explorer.ico" class="application-icon" />
+            <div class="application-title">
+                My Computer
+            </div>
+        </div>
+        <!-- About Me -->
+        <div class="application">
+            <img src="./images/notepad.ico" class="application-icon" />
+            <div class="application-title">
+                About Me
+            </div>
+        </div>
+        <!-- Projects -->
+        <div class="application">
+            <img src="./images/directory_closed.ico" class="application-icon" />
+            <div class="application-title">
+                Projects
+            </div>
+        </div>
+        <!-- More -->
+        <div class="application" onclick="openApplication('explorer', 'explorer-task')">
+            <img src="./images/directory_open_file_mydocs.ico" class="application-icon" />
+            <div class="application-title">
+                More
+            </div>
+        </div>
+        <!-- Contact -->
+        <div class="application">
+            <img src="./images/mail.ico" class="application-icon" />
+            <div class="application-title">
+                Contact Me
+            </div>
+        </div>
+      </div>
+
     
 <div id="taskbar">
     <!-- Start Button -->
@@ -112,6 +162,58 @@
         <img src="./images/volume.ico" id="volume-icon" />
         <div id="clock"></div>
     </div>
+</div>
+
+<div id="start-menu">
+  <div id="system-name">Windows 98</div>
+  <div id="start-menu-button-container">
+      <!-- Programs -->
+      <div id="programs" class="start-menu-button">
+          <img src="./images/directory_program_group_small.ico" class="start-menu-button-icon" />
+          <div class="start-menu-button-label">Programs</div>
+          <div class="arrow">▸</div>
+          <div id="programs-submenu" class="submenu">
+              <div class="submenu-option">
+                  <div class="text">Minesweeper</div>
+              </div>
+          </div>
+      </div>         
+      <!-- Favorites -->
+      <div class="start-menu-button">
+          <img src="./images/directory_favorites_small.ico" class="start-menu-button-icon" />
+          <div class="start-menu-button-label">Favorites</div>
+      </div>
+      <!-- Documents -->
+      <div class="start-menu-button">
+          <img src="./images/directory_open_file_mydocs.ico" class="start-menu-button-icon" style="width:26px; margin-left:5px; margin-right:4px;" />
+          <div class="start-menu-button-label" style="margin-top:8px;">Documents</div>
+      </div>
+      <!-- Find -->
+      <div class="start-menu-button">
+          <img src="./images/search_file_2.ico" class="start-menu-button-icon" />
+          <div class="start-menu-button-label">Find</div>
+      </div>
+      <!-- Run -->
+      <div class="start-menu-button">
+          <img src="./images/application_hourglass_small.ico" class="start-menu-button-icon" />
+          <div class="start-menu-button-label">Run</div>
+      </div>
+      <!-- Help -->
+      <div class="start-menu-button">
+          <img src="./images/help_book_small.ico" class="start-menu-button-icon" />
+          <div class="start-menu-button-label">Help</div>
+      </div>
+      <!-- Log Off -->
+      <div class="start-menu-button">
+          <img src="./images/key_win.ico" class="start-menu-button-icon" />
+          <div class="start-menu-button-label">Log Off</div>
+      </div>
+      <!-- Shut Down -->
+      <div class="start-menu-button">
+          <img src="./images/shut_down_cool.ico" class="start-menu-button-icon" />
+          <div class="start-menu-button-label">Shut Down</div>
+      </div>
+  </div>
 </div>
 
 

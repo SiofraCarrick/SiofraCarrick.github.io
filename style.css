@@ -1,9 +1,18 @@
 body {
-    background-color: #008080;
-    font-family: 'Helvetica Neue', Arial, Arial, Helvetica, sans-serif, sans-sherif;
-    font-size: 16px;
+  font-family: 'Helvetica Neue', Arial, Arial, Helvetica, sans-serif, sans-sherif;
+  font-size: 16px;
+  background-color: teal;
 }
 
+#app{
+  z-index: 9999; /* Higher value to make sure it's above the desktop and taskbar */
+ /* Ensure it's not constrained to the flow of the document */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: auto
+}
 #taskbar {
   margin: 0px;
   padding: 0px 8px;
@@ -15,7 +24,7 @@ body {
   right: 0px;
   border-top: 2px outset #fff;
   background-color: #c0c0c0;
-  z-index: 999999;
+  z-index: 9999999;
 }
 #start-button {
   cursor: pointer;
@@ -73,25 +82,6 @@ body {
   width: 18px;
   height: 18px;
 }
-
-#start-menu {
-  display: none;
-  background-color: #c0c0c0;
-  position: fixed;
-  left: 2px;
-  bottom: 25px;
-  min-width: 215px;
-  height: 350px;
-  border: 2px outset #fff;
-  box-shadow: 1px 1px black;
-  overflow-y: auto;
-  animation-name: floatup;
-  animation-duration: 0.5s;
-  -webkit-animation-name: floatup;
-  -webkit-animation-duration: 0.5s;
-  transform: translateY(0px);
-}
-
 #start-menu {
   display: none;
   background-color: #c0c0c0;
@@ -143,4 +133,160 @@ body {
   font-size: 17px;
   transform: rotate(-90deg);
   padding-left: 15px;
+}
+#start-menu-button-container {
+  min-width: 186px;
+  width:auto;
+  height: 100%;
+  position: relative;
+  bottom: 0px;
+  left: 25px;
+  display:inline-block;
+}
+.start-menu-button {
+  background-color: #c0c0c0;
+  position: relative;
+  bottom: 0px;
+  left: 0px;
+  padding-left: 5px;
+  cursor: pointer;
+  height: 43px;
+  color: black;
+}
+.start-menu-button-icon {
+  display: inline-block;
+  margin-top: 6px;
+  width: 36px;
+}
+.start-menu-button-label {
+  display: inline-block;
+  font-size: 17px;
+  vertical-align: middle;
+  color: inherit;
+  padding-top: 4px;
+}
+.start-menu-button:hover {
+  background-color: #000080;
+  color: white;
+}
+.submenu {
+  background-color: silver;
+  position: absolute;
+  left: 100%;
+  top: 0px;
+  border: 2px outset #fff;
+  box-shadow: 1px 1px black;
+  display: none;
+}
+.start-menu-button:hover+.submenu {
+  display:inline-block;
+}
+.submenu-option {
+  margin: 2px;
+}
+  .submenu-option:hover {
+      background-color: #000080;
+      color: white;
+  }
+  .submenu-option:active {
+      color: white;
+      background-color: #000080;
+  }
+  .submenu-option .text {
+      font-size: 12px;
+      width: 140px;
+      display: inline-block;
+  }
+  .submenu-option img {
+      width: 16px;
+      vertical-align: middle;
+  }
+.arrow {
+  display: inline;
+  right: 3px;
+  position: absolute;
+  top:20%;
+}
+#task-container {
+  position: absolute;
+  bottom: 0;
+  left: 69px;
+  margin-right: 95px;
+  display: inline-block;
+  height: 100%;
+  width: auto;
+  min-height: 32px;
+}
+.task {
+  display: none;
+  border: 2px outset #fff;
+  padding: 0px 0px 0.0px 0.0px;
+  max-width: 219px;
+  min-width: 30px;
+  margin-top: 4px;
+  margin-left: 2px;
+  box-shadow: 1px 1px black;
+  height: 25px;
+  vertical-align: top;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.task-text {
+  display: inline-block;
+  text-align: left;
+  font-size: 14px;
+  position: relative;
+  text-align: left;
+  vertical-align: top;
+  margin: 1px 6px 0 0;
+}
+.task-icon {
+  display: inline-block;
+  height: 21px;
+  width: 21px;
+  margin-left: 2px;
+  margin-bottom: 5px;
+}
+.active-task {
+  border: 2px inset #fff;
+  box-shadow: -1px -1px black;
+  font-weight: bold;
+  overflow-x: hidden;
+  margin-top: 4px;
+}
+#desktop {
+  z-index: 1;
+  bottom: 32px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  padding-top: 13px;
+  padding-left: 0px;
+}
+.application {
+  cursor: pointer;
+  position: relative;
+  top: 30px;
+  left: 0px;
+  width: 80px;
+  height: 60px;
+  text-align: center;
+  padding-top: 4px;
+  margin-left: 6px;
+  margin-top: 14px;
+}
+  .application:first-child {
+      margin-top: 0px;
+  }
+.application-icon {
+  width: 32px;
+  height: 32px;
+}
+.application-title {
+  font-size: 12px;
+  color: white;
+  text-align: center;
+  margin-top: 4px;
 }
