@@ -9,8 +9,7 @@
 
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    
-    
+    <link rel="stylesheet" href="./application.css">
 
 </head>
 
@@ -111,6 +110,10 @@
 
 <body onload="startTime()">
 <div id="app"></div>
+<div id="days">
+  <!----   <iframe src="./days.html"></iframe> -->
+</div>
+
  <div id="desktop">
         <!-- My Computer -->
         <div class="application">
@@ -134,6 +137,7 @@
             </div>
         </div>
         <!-- More -->
+        
         <div class="application" onclick="openApplication('explorer', 'explorer-task')">
             <img src="./images/directory_open_file_mydocs.ico" class="application-icon" />
             <div class="application-title">
@@ -147,7 +151,15 @@
                 Contact Me
             </div>
         </div>
+
+        <div id="minesweeper-desktop-app" class="application" onclick="openApplication('minesweeper', 'minesweeper-task')">
+            <!--  onclick="openApplication('minesweeper', 'minesweeper-task')" -->
+            <img src="./images/minesweeper.ico" class="application-icon" />
+            <div class="application-title">
+                Minesweeper
+            </div>
       </div>
+ </div>
 
     
 <div id="taskbar">
@@ -171,13 +183,7 @@
       <div id="programs" class="start-menu-button">
           <img src="./images/directory_program_group_small.ico" class="start-menu-button-icon" />
           <div class="start-menu-button-label">Programs</div>
-          <div class="arrow">▸</div>
-          <div id="programs-submenu" class="submenu">
-              <div class="submenu-option">
-                  <div class="text">Minesweeper</div>
-              </div>
-          </div>
-      </div>         
+      </div>        
       <!-- Favorites -->
       <div class="start-menu-button">
           <img src="./images/directory_favorites_small.ico" class="start-menu-button-icon" />
@@ -216,7 +222,140 @@
   </div>
 </div>
 
+<!-- Minesweeper Application Window -->
+<div id="minesweeper" class="window active-window application-window" program-name="minesweeper" pid="1">
+    <!--  ui-widget-content ui-draggableui-widget-content ui-draggable  -->
+    <div class="window-border">
+        <div class="title-bar h-count ui-draggable-handle" id="parent">
+            <img class="icon" src="./images/minesweeper.ico" />
+            <div class="control-box">
+                <a class="button-3d minimize" onclick="toggleActive('minesweeper-task', 'minesweeper')"><span>&nbsp;</span></a>
+                <a class="button-3d maximize" onclick="fullscreen('minesweeper')"><span>&nbsp;</span></a>
+                <a class="button-3d close" onclick="closeApplication('minesweeper', 'minesweeper-task')"><span>&nbsp;</span></a>
+            </div>
+            <span class="title">Minesweeper</span>
+        </div>
+        <div class="clear"></div>
+        <div id="minesweeper-content">
+            <!--<iframe src="http://minesweeper.tenmore.solutions/" id="mine-frame" scrolling="no"></iframe>-->
+            <!-- width="270" height="375" -->
+            <iframe src="./days.html" id="mine-frame" scrolling="no"></iframe>
+        </div>
+    </div>
+</div>
 
+
+<script>
+    dragElement(document.getElementById(("minesweeper")));
+    function dragElement(elmnt) {
+        var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+        if (document.getElementById(elmnt.id + "header")) {
+            /* if present, the header is where you move the DIV from:*/
+            document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+        } else { /* otherwise, move the DIV from anywhere inside the DIV:*/                
+            elmnt.onmousedown = dragMouseDown;
+        }
+        function dragMouseDown(e) {
+            e = e || window.event;
+            // get the mouse cursor position at startup:
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            document.onmouseup = closeDragElement;
+            // call a function whenever the cursor moves:
+            document.onmousemove = elementDrag;
+        }
+        function elementDrag(e) {
+            e = e || window.event;
+            // calculate the new cursor position:
+            pos1 = pos3 - e.clientX;
+            pos2 = pos4 - e.clientY;
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            // set the element's new position:
+            elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+            elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+        }
+        function closeDragElement() {
+            /* stop moving when mouse button is released:*/
+            document.onmouseup = null;
+            document.onmousemove = null;
+        }
+    }
+</script>
+<script>
+    //document.getElementById('minesweeper-desktop-app').onclick = openApplication('minesweeper', 'minesweeper-task');
+    function fullscreen(id) {
+        var h = document.getElementById("desktop").offsetHeight;
+        var w = document.getElementById("desktop").offsetWidth;
+        item = document.getElementById(id);
+        if (item.classList.contains('application-fullscreen')) {
+            item.classList.remove('application-fullscreen');
+            if (id == 'minesweeper') {
+                item.style.top = "73.4px";
+                item.style.left = "512px";
+                item.style.height = "440.4px";
+                document.getElementById("minesweeper-content").style.height = "auto";
+                document.getElementById("minesweeper-content").style.width = "auto";
+            }
+            else if (id == 'explorer') {
+                document.getElementById("explorer-content").style.height = "auto";
+                document.getElementById("explorer-content").style.width = "auto";
+            }                
+        }
+        else {
+            item.classList.add('application-fullscreen');
+            if (id == 'minesweeper') {
+                document.getElementById("minesweeper-content").style.height = h + "px";
+                document.getElementById("minesweeper-content").style.width = w + "px";
+            }
+            else if (id == 'explorer') {
+                document.getElementById("explorer-content").style.height = h + "px";
+                document.getElementById("explorer-content").style.width = w + "px";
+            }
+        }
+    }
+    function showItem(id) {
+        item = document.getElementById(id);
+        if (item.style.display == 'none') {
+            item.style.display = 'block';
+        }
+        
+        else {
+            item.style.display = 'none';
+        }
+    }
+    function showInlineItem(id) {
+        item = document.getElementById(id);
+        if (item.style.display == 'none') {
+            item.style.display = 'inline-block';
+        }
+        else if (item.style.display == ' inline-block') {
+            item.style.display = 'none';
+        }
+        else {
+            item.style.display = 'none';
+        }
+    }
+    function toggleActive(task, window) {
+        item = document.getElementById(task);            
+        if (item.classList.contains('active-task')) {
+            item.classList.remove('active-task');
+        }
+        else {
+            item.classList.add('active-task');
+        }
+        showItem(window);
+    }
+    function openApplication(window, task) {
+        showItem(window);
+        showInlineItem(task);
+        toggleActive(task);
+    }
+    function closeApplication(window, task) {
+        showItem(window);
+        showInlineItem(task);
+    }
+</script>
 
 </body>
 </html>
