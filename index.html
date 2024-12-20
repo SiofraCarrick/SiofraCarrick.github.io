@@ -188,20 +188,22 @@
         id="task-container">
 
         <!-- music-->
-        <div id="music-task" class="task active-task" style="display : block">
+        <div id="music-task" class="task active-task" style="display : inline-block">
             <img class="task-icon" src="./images/win.png"/>
             <div class="task-text">
                 Win amp
             </div>
-            <!-- Minesweeper -->
-            <div id="minesweeper-task" class="task active-task" onclick="toggleActive('minesweeper-task', 'minesweeper')">
-                <img class="task-icon" src="./images/calendar-0.png"/>
-                <div class="task-text">
-                    Days since
-                </div>
-            </div>
-
         </div>
+
+        <!-- Minesweeper -->
+        <div id="minesweeper-task" class="task active-task" onclick="toggleActive('minesweeper-task', 'minesweeper')">
+            <img class="task-icon" src="./images/calendar-0.png"/>
+            <div class="task-text">
+                Days since
+            </div>
+        </div>
+
+
         <!-- Notifications & Clock -->
         <div id="notification-tray">
             <img src="./images/volume.ico" id="volume-icon"/>
@@ -264,7 +266,7 @@
             <div class="title-bar h-count ui-draggable-handle popup-header" id="parent">
                 <img class="icon" src="./images/calendar-0.png"/>
                 <div class="control-box">
-                    <a class="button-3d minimize" onclick="toggleActive('minesweeper-task', 'minesweeper')">
+                    <a class="button-3d minimize" onclick="minimizeApplication('minesweeper', 'minesweeper-task')">
                         <span>&nbsp;</span>
                     </a>
                     <a class="button-3d maximize" onclick="fullscreen('minesweeper')">
@@ -284,25 +286,25 @@
     </div>
 
     <!-- 
-    <div id="minesweeper1" class="window active-window application-window " style="display : none">
-        <!--  ui-widget-content ui-draggableui-widget-content ui-draggable  
-        <div class="window-border">
-            <div class="title-bar h-count ui-draggable-handle" id="parent">
-                <img class="icon" src="./images/calendar-0.png" />
-                <div class="control-box">
-                    <a class="button-3d minimize" onclick="toggleActive('minesweeper-task', 'minesweeper')"><span>&nbsp;</span></a>
-                    <a class="button-3d maximize" onclick="fullscreen('minesweeper')"><span>&nbsp;</span></a>
-                    <a class="button-3d close" onclick="closeApplication('minesweeper', 'minesweeper-task')"><span>&nbsp;</span></a>
+        <div id="minesweeper1" class="window active-window application-window " style="display : none">
+            <!--  ui-widget-content ui-draggableui-widget-content ui-draggable  
+            <div class="window-border">
+                <div class="title-bar h-count ui-draggable-handle" id="parent">
+                    <img class="icon" src="./images/calendar-0.png" />
+                    <div class="control-box">
+                        <a class="button-3d minimize" onclick="toggleActive('minesweeper-task', 'minesweeper')"><span>&nbsp;</span></a>
+                        <a class="button-3d maximize" onclick="fullscreen('minesweeper')"><span>&nbsp;</span></a>
+                        <a class="button-3d close" onclick="closeApplication('minesweeper', 'minesweeper-task')"><span>&nbsp;</span></a>
+                    </div>
+                    <span class="title">Days Since we met</span>
                 </div>
-                <span class="title">Days Since we met</span>
-            </div>
-            <div class="clear"></div>
-            <div id="minesweeper-content">
-                <iframe src="./days.html" id="mine-frame" scrolling="no" ></iframe>
+                <div class="clear"></div>
+                <div id="minesweeper-content">
+                    <iframe src="./days.html" id="mine-frame" scrolling="no" ></iframe>
+                </div>
             </div>
         </div>
-    </div>
-    -->
+        -->
 
 
     <script>
@@ -462,28 +464,18 @@
         }
 
         function showItem(id) {
-            console.log("Trying to show item with ID:", id); // Debugging line
-            var item = document.getElementById(id);
-            if (item) {
-                if (item.style.display == 'none') {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
-            } else {
-                console.error("Element with ID " + id + " not found."); // Error log
-            }
-        }
-        function showInlineItem(id) {
-            item = document.getElementById(id);
-            if (item.style.display == 'none') {
-                item.style.display = 'inline-block';
-            } else if (item.style.display == ' inline-block') {
-                item.style.display = 'none';
-            } else {
-                item.style.display = 'none';
-            }
-        }
+    const item = document.getElementById(id);
+    if (item) {
+        item.style.display = 'block'; // Always set to 'block' explicitly
+    }
+}
+
+function showInlineItem(id) {
+    const item = document.getElementById(id);
+    if (item) {
+        item.style.display = 'inline-block'; // Always set to 'inline-block' explicitly
+    }
+}
         function toggleActive(task, window) {
             item = document.getElementById(task);
             if (item.classList.contains('active-task')) {
@@ -497,9 +489,30 @@
             showInlineItem(task); // Ensure 'task' is a valid ID
             toggleActive(task);
         }
-        function closeApplication(window, task) {
-            showItem(window);
-            showInlineItem(task);
-        }
+    
+    function closeApplication(windowId, taskId) {
+    const windowElement = document.getElementById(windowId);
+    const taskElement = document.getElementById(taskId);
+
+    if (windowElement) windowElement.style.display = 'none';
+    if (taskElement) {
+        taskElement.classList.remove('active-task');
+        taskElement.style.display = 'none'; // Hide the task completely
+    }
+}
+
+    function minimizeApplication(windowId, taskId) {
+    const windowElement = document.getElementById(windowId);
+    const taskElement = document.getElementById(taskId);
+
+    if (windowElement) windowElement.style.display = 'none'; // Hide the window
+    if (taskElement) {
+        taskElement.classList.add('active-task'); // Keep the task active
+        taskElement.style.display = 'inline-block'; // Ensure the task remains visible
+    }
+
+
+}
     </script>
-</body></body></html>
+</body>
+</html>
