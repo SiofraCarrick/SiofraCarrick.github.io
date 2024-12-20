@@ -23,8 +23,9 @@
 
 <body>
     <div class="container">
-        <h1>Days Since we met</h1>
+        <h1>Days Since we met :</h1>
         <p id="days"></p>
+        <h2> Or. </h2> 
     </div>
 
     <script>
@@ -33,6 +34,7 @@
             const today = new Date();
             const timeDifference = today - startDate;
             const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            
             document.getElementById('days').textContent = daysDifference >= 0 ? daysDifference : 0;
         }
 

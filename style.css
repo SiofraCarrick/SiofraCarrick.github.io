@@ -2,6 +2,11 @@ body {
   font-family: 'Helvetica Neue', Arial, Arial, Helvetica, sans-serif, sans-sherif;
   font-size: 16px;
   background-color: teal;
+  height: 100vh;
+}
+
+.content{
+  height:100%
 }
 
 iframe {
@@ -18,7 +23,7 @@ iframe {
 
 .popup {
   position: absolute;
-  /*resize: both; !*enable this to css resize*! */
+  resize: both; 
   overflow: auto;
 }
 
@@ -226,48 +231,7 @@ iframe {
   color: inherit;
   padding-top: 4px;
 }
-.start-menu-button:hover {
-  background-color: #000080;
-  color: white;
-}
-.submenu {
-  background-color: silver;
-  position: absolute;
-  left: 100%;
-  top: 0px;
-  border: 2px outset #fff;
-  box-shadow: 1px 1px black;
-  display: none;
-}
-.start-menu-button:hover+.submenu {
-  display:inline-block;
-}
-.submenu-option {
-  margin: 2px;
-}
-  .submenu-option:hover {
-      background-color: #000080;
-      color: white;
-  }
-  .submenu-option:active {
-      color: white;
-      background-color: #000080;
-  }
-  .submenu-option .text {
-      font-size: 12px;
-      width: 140px;
-      display: inline-block;
-  }
-  .submenu-option img {
-      width: 16px;
-      vertical-align: middle;
-  }
-.arrow {
-  display: inline;
-  right: 3px;
-  position: absolute;
-  top:20%;
-}
+
 #task-container {
   position: absolute;
   bottom: 0;
@@ -323,7 +287,7 @@ iframe {
   left: 0;
   top: 0; /* Added to ensure full vertical span */
   width: 100%;
-  height: calc(100% - 32px); /* Adjusted to account for the taskbar */
+  height: calc(100%); /* Adjusted to account for the taskbar */
   padding-top: 0; /* Reset padding for consistent layout */
   padding-left: 0;
 }

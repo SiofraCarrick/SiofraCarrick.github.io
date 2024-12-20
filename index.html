@@ -4,7 +4,6 @@
 
         <title>Cool Zone
         </title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="utf-8"/>
         <link rel="icon" type="image/x-icon" href="./images/fav.ico">
 
@@ -117,427 +116,432 @@
             }
         }
     </script>
-</html></script><body>
-<div id="app"></div>
-
-<div id="desktop">
-    <div id="days-desktop-app" class="application" onclick="openApplication('days', 'days-task')">
-        <img src="./images/calendar-0.png" class="application-icon"/>
-        <div class="application-title">
-            Days Since Meeting You
-        </div>
-    </div>
-
-    <div id="days-desktop-app" class="application" onclick="openApplication('map', 'map-task')">
-        <img src="./images/world-4.png" class="application-icon"/>
-        <div class="application-title">
-            Where We Met
-        </div>
-    </div>
-
-    <!-- soppy message-->
-    <div id="message-desktop-app" class="application" onclick="openApplication('message', 'message-task')">
-        <img src="./images/mail.ico" class="application-icon"/>
-        <div class="application-title">
-            Soppy Message
-        </div>
-    </div>
-    <!-- My Computer -->
-    <div class="application">
-        <img src="./images/computer_explorer.ico" class="application-icon"/>
-        <div class="application-title">
-            My Computer
-        </div>
-    </div>
-    <!-- About Me -->
-    <div class="application">
-        <img src="./images/notepad.ico" class="application-icon"/>
-        <div class="application-title">
-            About Me
-        </div>
-    </div>
-    <!-- Projects -->
-    <div class="application">
-        <img src="./images/directory_closed.ico" class="application-icon"/>
-        <div class="application-title">
-            Projects
-        </div>
-    </div>
-</div>
 
 
-<div
-    id="taskbar">
-    <!-- Start Button -->
-    <div id="start-button" onclick="showItem('start-menu')">
-        <img src="./images/windows.ico" id="windows-icon"/>
-        <div id="start-button-text">Start</div>
-    </div>
+    <body>
+        <div id ="app"></div>
+        <div id="desktop">
 
-
-    <!-- Open Applications in the Taskbar -->
-    <div
-        id="task-container">
-
-        <!-- music-->
-        <div id="music-task" class="task active-task" style="display : inline-block">
-            <img class="task-icon" src="./images/win.png"/>
-            <div class="task-text">
-                Win amp
-            </div>
-        </div>
-
-        <!-- days -->
-        <div id="days-task" class="task active-task" onclick="toggleActive('days-task', 'days')">
-            <img class="task-icon" src="./images/calendar-0.png"/>
-            <div class="task-text">
-                Days since
-            </div>
-        </div>
-
-        <!-- message-->
-        <div id="message-task" class="task active-task" onclick="toggleActive('message-task', 'message')">
-            <img class="task-icon" src="./images/mail.ico"/>
-            <div class="task-text">
-                soppy Message
-            </div>
-        </div>
-
-        <!-- Map-->
-        <div id="map-task" class="task active-task" onclick="toggleActive('map-task', 'map')">
-            <img class="task-icon" src="./images/world-4.png"/>
-            <div class="task-text">
-                Where We Met
-            </div>
-        </div>
-
-
-        <!-- Notifications & Clock -->
-        <div id="notification-tray">
-            <img src="./images/volume.ico" id="volume-icon"/>
-            <div id="clock"></div>
-        </div>
-    </div>
-
-    <div id="start-menu">
-        <div id="system-name">Sarah's virtual Christmas Card</div>
-        <div
-            id="start-menu-button-container">
-            <!-- Programs -->
-            <div id="programs" class="start-menu-button">
-                <img src="./images/directory_program_group_small.ico" class="start-menu-button-icon"/>
-                <div class="start-menu-button-label">Hello</div>
-            </div>
-            <!-- Favorites -->
-            <div class="start-menu-button">
-                <img src="./images/directory_favorites_small.ico" class="start-menu-button-icon"/>
-                <div class="start-menu-button-label">Sarah</div>
-            </div>
-            <!-- Documents -->
-            <div class="start-menu-button">
-                <img src="./images/directory_open_file_mydocs.ico" class="start-menu-button-icon" style="width:26px; margin-left:5px; margin-right:4px;"/>
-                <div class="start-menu-button-label" style="margin-top:8px;">Happy
+            <!-- My Computer -->
+            <div class="application">
+                <img src="./images/computer_explorer.ico" class="application-icon"/>
+                <div class="application-title">
+                    My Computer
                 </div>
             </div>
-            <!-- Find -->
-            <div class="start-menu-button">
-                <img src="./images/search_file_2.ico" class="start-menu-button-icon"/>
-                <div class="start-menu-button-label">Christmas</div>
-            </div>
-            <!-- Run -->
-            <div class="start-menu-button">
-                <img src="./images/application_hourglass_small.ico" class="start-menu-button-icon"/>
-                <div class="start-menu-button-label">I</div>
-            </div>
-            <!-- Help -->
-            <div class="start-menu-button">
-                <img src="./images/help_book_small.ico" class="start-menu-button-icon"/>
-                <div class="start-menu-button-label">Love</div>
-            </div>
-            <!-- Log Off -->
-            <div class="start-menu-button">
-                <img src="./images/key_win.ico" class="start-menu-button-icon"/>
-                <div class="start-menu-button-label">You</div>
-            </div>
-            <!-- Shut Down -->
-            <div class="start-menu-button">
-                <img src="./images/shut_down_cool.ico" class="start-menu-button-icon"/>
-                <div class="start-menu-button-label">So Much</div>
-            </div>
-        </div>
-    </div>
 
-    <!-- days Application Window -->
-    <div
-        id="days" class="window active-window application-window popup" style="display : none">
-        <!--  ui-widget-content ui-draggableui-widget-content ui-draggable  -->
-        <div class="window-border">
-            <div class="title-bar h-count ui-draggable-handle popup-header" id="parent">
-                <img class="icon" src="./images/calendar-0.png"/>
-                <div class="control-box">
-                    <a class="button-3d minimize" onclick="minimizeApplication('days', 'days-task')">
-                        <span>&nbsp;</span>
-                    </a>
-                    <a class="button-3d maximize" onclick="fullscreen('days')">
-                        <span>&nbsp;</span>
-                    </a>
-                    <a class="button-3d close" onclick="closeApplication('days', 'days-task')">
-                        <span>&nbsp;</span>
-                    </a>
+            <div id="days-desktop-app" class="application" onclick="openApplication('days', 'days-task')">
+                <img src="./images/calendar-0.png" class="application-icon"/>
+                <div class="application-title">
+                    Days Since Meeting You
                 </div>
-                <span class="title">Days Since we met</span>
             </div>
-            <div class="clear"></div>
-            <div id="days-content">
-                <iframe src="./days.html" id="days-frame" scrolling="no"></iframe>
-            </div>
-        </div>
-    </div>
-    <!-- map app -->
-    <div id="map" class="window active-window application-window popup" style="display : none">
-        <div class="window-border">
-            <div class="title-bar h-count ui-draggable-handle popup-header" id="parent">
-                <img class="icon" src="./images/world-4.png"/>
-                <div class="control-box">
-                    <a class="button-3d minimize" onclick="toggleActive('map-task', 'map')">
-                        <span>&nbsp;</span>
-                    </a>
-                    <a class="button-3d maximize" onclick="fullscreen('map')">
-                        <span>&nbsp;</span>
-                    </a>
-                    <a class="button-3d close" onclick="closeApplication('map', 'map-task')">
-                        <span>&nbsp;</span>
-                    </a>
+
+            <div id="map-desktop-app" class="application" onclick="openApplication('map', 'map-task')">
+                <img src="./images/world-4.png" class="application-icon"/>
+                <div class="application-title">
+                    Where We Met
                 </div>
-                <span class="title">Where we met</span>
             </div>
-            <div class="clear"></div>
-            <div id="map-content">
-                <iframe src="./map.html" id="mine-frame" scrolling="no"></iframe>
-            </div>
-        </div>
-    </div>
 
-    <!-- message app -->
-    <div id="message" class="window active-window application-window popup" style="display : none">
-        <div class="window-border">
-            <div class="title-bar h-count ui-draggable-handle popup-header" id="parent">
-                <img class="icon" src="./images/mail.ico"/>
-                <div class="control-box">
-                    <a class="button-3d minimize" onclick="toggleActive('message-task', 'message')">
-                        <span>&nbsp;</span>
-                    </a>
-                    <a class="button-3d maximize" onclick="fullscreen('message')">
-                        <span>&nbsp;</span>
-                    </a>
-                    <a class="button-3d close" onclick="closeApplication('message', 'message-task')">
-                        <span>&nbsp;</span>
-                    </a>
+            <!-- soppy message-->
+            <div id="message-desktop-app" class="application" onclick="openApplication('message', 'message-task')">
+                <img src="./images/mail.ico" class="application-icon"/>
+                <div class="application-title">
+                    Soppy Message
                 </div>
-                <span class="title">Soppy Message</span>
             </div>
-            <div class="clear"></div>
-            <div id="message-content">
-                <iframe src="./marquee.html" id="message-frame" scrolling="no"></iframe>
+            <!-- About Me -->
+            <div class="application">
+                <img src="./images/notepad.ico" class="application-icon"/>
+                <div class="application-title">
+                    About Me
+                </div>
             </div>
-        </div>
-    </div>
+            <!-- Projects -->
+            <div class="application">
+                <img src="./images/directory_closed.ico" class="application-icon"/>
+                <div class="application-title">
+                    Projects
+                </div>
+            </div>
 
 
-    <script>
-        window.onload = function () {
-            initDragElement();
-            initResizeElement();
-        };
+            <!-- days Application Window -->
+            <div
+                id="days" class="window active-window application-window popup" style="display : none">
+                <!--  ui-widget-content ui-draggableui-widget-content ui-draggable  -->
+                <div class="window-border">
+                    <div class="title-bar h-count ui-draggable-handle popup-header" id="parent">
+                        <img class="icon" src="./images/calendar-0.png"/>
+                        <div class="control-box">
+                            <a class="button-3d minimize" onclick="minimizeApplication('days', 'days-task')">
+                                <span>&nbsp;</span>
+                            </a>
+                            <a class="button-3d maximize" onclick="fullscreen('days')">
+                                <span>&nbsp;</span>
+                            </a>
+                            <a class="button-3d close" onclick="closeApplication('days', 'days-task')">
+                                <span>&nbsp;</span>
+                            </a>
+                        </div>
+                        <span class="title">Days Since we met</span>
+                    </div>
+                    <div class="clear"></div>
+                    <div id="content">
+                        
+                        <iframe src="./days.html" id="days-frame" scrolling="no"></iframe>
+                    
+                    </div>
+                </div>
+            </div>
+            <!-- map app -->
+            <div id="map" class="window active-window application-window popup" style="display : none">
+                <div class="window-border">
+                    <div class="title-bar h-count ui-draggable-handle popup-header" id="parent">
+                        <img class="icon" src="./images/world-4.png"/>
+                        <div class="control-box">
+                            <a class="button-3d minimize" onclick="toggleActive('map-task', 'map')">
+                                <span>&nbsp;</span>
+                            </a>
+                            <a class="button-3d maximize" onclick="fullscreen('map')">
+                                <span>&nbsp;</span>
+                            </a>
+                            <a class="button-3d close" onclick="closeApplication('map', 'map-task')">
+                                <span>&nbsp;</span>
+                            </a>
+                        </div>
+                        <span class="title">Where we met</span>
+                    </div>
+                    <div class="clear"></div>
+                    <div id="map-content">
+                        <iframe src="./map.html" id="mine-frame" scrolling="no"></iframe>
+                    </div>
+                </div>
+            </div>
 
-        function initDragElement() {
-            var pos1 = 0,
-                pos2 = 0,
-                pos3 = 0,
-                pos4 = 0;
-            var popups = document.getElementsByClassName("popup");
-            var elmnt = null;
-            var currentZIndex = 100; // TODO reset z index when a threshold is passed
+            <!-- message app -->
+            <div id="message" class="window active-window application-window popup" style="display : none">
+                <div class="window-border">
+                    <div class="title-bar h-count ui-draggable-handle popup-header" id="parent">
+                        <img class="icon" src="./images/mail.ico"/>
+                        <div class="control-box">
+                            <a class="button-3d minimize" onclick="toggleActive('message-task', 'message')">
+                                <span>&nbsp;</span>
+                            </a>
+                            <a class="button-3d maximize" onclick="fullscreen('message')">
+                                <span>&nbsp;</span>
+                            </a>
+                            <a class="button-3d close" onclick="closeApplication('message', 'message-task')">
+                                <span>&nbsp;</span>
+                            </a>
+                        </div>
+                        <span class="title">Soppy Message</span>
+                    </div>
+                    <div class="clear"></div>
+                    <div id="message-content">
+                        <iframe src="./marquee.html" id="message-frame" scrolling="no"></iframe>
+                    </div>
+                </div>
+            </div>
 
-            for (var i = 0; i < popups.length; i++) {
-                var popup = popups[i];
-                var header = getHeader(popup);
-
-                popup.onmousedown = function () {
-                    this.style.zIndex = "" + ++ currentZIndex;
-                };
-
-                if (header) {
-                    header.parentPopup = popup;
-                    header.onmousedown = dragMouseDown;
-                }
-            }
-
-            function dragMouseDown(e) {
-                elmnt = this.parentPopup;
-                elmnt.style.zIndex = "" + ++ currentZIndex;
-
-                e = e || window.event;
-                // get the mouse cursor position at startup:
-                pos3 = e.clientX;
-                pos4 = e.clientY;
-                document.onmouseup = closeDragElement;
-                // call a function whenever the cursor moves:
-                document.onmousemove = elementDrag;
-            }
-
-            function elementDrag(e) {
-                if (! elmnt) {
-                    return;
-                }
-
-                e = e || window.event;
-                // calculate the new cursor position:
-                pos1 = pos3 - e.clientX;
-                pos2 = pos4 - e.clientY;
-                pos3 = e.clientX;
-                pos4 = e.clientY;
-                // set the element's new position:
-                elmnt.style.top = elmnt.offsetTop - pos2 + "px";
-                elmnt.style.left = elmnt.offsetLeft - pos1 + "px";
-            }
-
-            function closeDragElement() { /* stop moving when mouse button is released:*/
-                document.onmouseup = null;
-                document.onmousemove = null;
-            }
-
-            function getHeader(element) {
-                var headerItems = element.getElementsByClassName("popup-header");
-
-                if (headerItems.length === 1) {
-                    return headerItems[0];
-                }
-
-                return null;
-            }
-        }
-
-        function initResizeElement() {
-            var popups = document.getElementsByClassName("popup");
-            var element = null;
-            var startX,
-                startY,
-                startWidth,
-                startHeight;
-
-            for (var i = 0; i < popups.length; i++) {
-                var p = popups[i];
-
-                var right = document.createElement("div");
-                right.className = "resizer-right";
-                p.appendChild(right);
-                right.addEventListener("mousedown", initDrag, false);
-                right.parentPopup = p;
-
-                var bottom = document.createElement("div");
-                bottom.className = "resizer-bottom";
-                p.appendChild(bottom);
-                bottom.addEventListener("mousedown", initDrag, false);
-                bottom.parentPopup = p;
-
-                var both = document.createElement("div");
-                both.className = "resizer-both";
-                p.appendChild(both);
-                both.addEventListener("mousedown", initDrag, false);
-                both.parentPopup = p;
-            }
-
-            function initDrag(e) {
-                element = this.parentPopup;
-
-                startX = e.clientX;
-                startY = e.clientY;
-                startWidth = parseInt(document.defaultView.getComputedStyle(element).width, 10);
-                startHeight = parseInt(document.defaultView.getComputedStyle(element).height, 10);
-                document.documentElement.addEventListener("mousemove", doDrag, false);
-                document.documentElement.addEventListener("mouseup", stopDrag, false);
-            }
-
-            function doDrag(e) {
-                element.style.width = startWidth + e.clientX - startX + "px";
-                element.style.height = startHeight + e.clientY - startY + "px";
-            }
-
-            function stopDrag() {
-                document.documentElement.removeEventListener("mousemove", doDrag, false);
-                document.documentElement.removeEventListener("mouseup", stopDrag, false);
-            }
-        }
-    </script>
-    <script>
-
-function fullscreen(id) {
-    const item = document.getElementById(id);
-    if (item.classList.contains('application-fullscreen')) {
-        item.classList.remove('application-fullscreen');
-    } else {
-        item.classList.add('application-fullscreen');
-    }
-}
-
-        function showItem(id) {
-            const item = document.getElementById(id);
-            if (item) {
-                if (item.style.display === 'none' || item.style.display === '') {
-                    item.style.display = 'block'; // Show the start menu
-                } else {
-                    item.style.display = 'none'; // Hide the start menu
-                }
-            }
-        }
-
-        function showInlineItem(id) {
-            const item = document.getElementById(id);
-            if (item) {
-                item.style.display = 'inline-block'; // Always set to 'inline-block' explicitly
-            }
-        }
-        function toggleActive(task, window) {
-            item = document.getElementById(task);
-            if (item.classList.contains('active-task')) {
-                item.classList.remove('active-task');
-            } else {
-                item.classList.add('active-task');
-            } showItem(window);
-        }
-        function openApplication(window, task) {
-            showItem(window); // Ensure 'window' is a valid ID
-            showInlineItem(task); // Ensure 'task' is a valid ID
-            toggleActive(task);
-        }
-
-        function closeApplication(windowId, taskId) {
-            const windowElement = document.getElementById(windowId);
-            const taskElement = document.getElementById(taskId);
-
-            if (windowElement) 
-                windowElement.style.display = 'none';
-            
-            if (taskElement) {
-                taskElement.classList.remove('active-task');
-                taskElement.style.display = 'none'; // Hide the task completely
-            }
-        }
-
-        function minimizeApplication(windowId, taskId) {
-            const windowElement = document.getElementById(windowId);
-            const taskElement = document.getElementById(taskId);
-
-            if (windowElement) 
-                windowElement.style.display = 'none';
-             // Hide the window
-            if (taskElement) {
-                taskElement.classList.add('active-task'); // Keep the task active
-                taskElement.style.display = 'inline-block'; // Ensure the task remains visible
-            }
+            <div
+                id="taskbar">
+                <!-- Start Button -->
+                <div id="start-button" onclick="showItem('start-menu')">
+                    <img src="./images/windows.ico" id="windows-icon"/>
+                    <div id="start-button-text">Start</div>
+                </div>
 
 
-        }
-    </script>
-</body></body></html>
+                <!-- Open Applications in the Taskbar -->
+                <div
+                    id="task-container">
+
+                    <!-- music-->
+                    <div id="music-task" class="task active-task" style="display : inline-block">
+                        <img class="task-icon" src="./images/win.png"/>
+                        <div class="task-text">
+                            Win amp
+                        </div>
+                    </div>
+
+                    <!-- days -->
+                    <div id="days-task" class="task active-task" onclick="toggleActive('days-task', 'days')">
+                        <img class="task-icon" src="./images/calendar-0.png"/>
+                        <div class="task-text">
+                            Days since
+                        </div>
+                    </div>
+
+                    <!-- message-->
+                    <div id="message-task" class="task active-task" onclick="toggleActive('message-task', 'message')">
+                        <img class="task-icon" src="./images/mail.ico"/>
+                        <div class="task-text">
+                            soppy Message
+                        </div>
+                    </div>
+
+                    <!-- Map-->
+                    <div id="map-task" class="task active-task" onclick="toggleActive('map-task', 'map')">
+                        <img class="task-icon" src="./images/world-4.png"/>
+                        <div class="task-text">
+                            Where We Met
+                        </div>
+                    </div>
+
+
+                    <!-- Notifications & Clock -->
+                    <div id="notification-tray">
+                        <img src="./images/volume.ico" id="volume-icon"/>
+                        <div id="clock"></div>
+                    </div>
+                </div>
+
+                <div id="start-menu">
+                    <div id="system-name">Sarah's virtual Christmas Card</div>
+                    <div
+                        id="start-menu-button-container">
+                        <!-- Programs -->
+                        <div id="programs" class="start-menu-button">
+                            <img src="./images/directory_program_group_small.ico" class="start-menu-button-icon"/>
+                            <div class="start-menu-button-label">Hello</div>
+                        </div>
+                        <!-- Favorites -->
+                        <div class="start-menu-button">
+                            <img src="./images/directory_favorites_small.ico" class="start-menu-button-icon"/>
+                            <div class="start-menu-button-label">Sarah</div>
+                        </div>
+                        <!-- Documents -->
+                        <div class="start-menu-button">
+                            <img src="./images/directory_open_file_mydocs.ico" class="start-menu-button-icon" style="width:26px; margin-left:5px; margin-right:4px;"/>
+                            <div class="start-menu-button-label" style="margin-top:8px;">Happy
+                            </div>
+                        </div>
+                        <!-- Find -->
+                        <div class="start-menu-button">
+                            <img src="./images/search_file_2.ico" class="start-menu-button-icon"/>
+                            <div class="start-menu-button-label">Christmas</div>
+                        </div>
+                        <!-- Run -->
+                        <div class="start-menu-button">
+                            <img src="./images/application_hourglass_small.ico" class="start-menu-button-icon"/>
+                            <div class="start-menu-button-label">I</div>
+                        </div>
+                        <!-- Help -->
+                        <div class="start-menu-button">
+                            <img src="./images/help_book_small.ico" class="start-menu-button-icon"/>
+                            <div class="start-menu-button-label">Love</div>
+                        </div>
+                        <!-- Log Off -->
+                        <div class="start-menu-button">
+                            <img src="./images/key_win.ico" class="start-menu-button-icon"/>
+                            <div class="start-menu-button-label">You</div>
+                        </div>
+                        <!-- Shut Down -->
+                        <div class="start-menu-button">
+                            <img src="./images/shut_down_cool.ico" class="start-menu-button-icon"/>
+                            <div class="start-menu-button-label">So Much</div>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    window.onload = function () {
+                        initDragElement();
+                        initResizeElement();
+                    };
+
+                    function initDragElement() {
+                        var pos1 = 0,
+                            pos2 = 0,
+                            pos3 = 0,
+                            pos4 = 0;
+                        var popups = document.getElementsByClassName("popup");
+                        var elmnt = null;
+                        var currentZIndex = 100; // TODO reset z index when a threshold is passed
+
+                        for (var i = 0; i < popups.length; i++) {
+                            var popup = popups[i];
+                            var header = getHeader(popup);
+
+                            popup.onmousedown = function () {
+                                this.style.zIndex = "" + ++ currentZIndex;
+                            };
+
+                            if (header) {
+                                header.parentPopup = popup;
+                                header.onmousedown = dragMouseDown;
+                            }
+                        }
+
+                        function dragMouseDown(e) {
+                            elmnt = this.parentPopup;
+                            elmnt.style.zIndex = "" + ++ currentZIndex;
+
+                            e = e || window.event;
+                            // get the mouse cursor position at startup:
+                            pos3 = e.clientX;
+                            pos4 = e.clientY;
+                            document.onmouseup = closeDragElement;
+                            // call a function whenever the cursor moves:
+                            document.onmousemove = elementDrag;
+                        }
+
+                        function elementDrag(e) {
+                            if (! elmnt) {
+                                return;
+                            }
+
+                            e = e || window.event;
+                            // calculate the new cursor position:
+                            pos1 = pos3 - e.clientX;
+                            pos2 = pos4 - e.clientY;
+                            pos3 = e.clientX;
+                            pos4 = e.clientY;
+                            // set the element's new position:
+                            elmnt.style.top = elmnt.offsetTop - pos2 + "px";
+                            elmnt.style.left = elmnt.offsetLeft - pos1 + "px";
+                        }
+
+                        function closeDragElement() { /* stop moving when mouse button is released:*/
+                            document.onmouseup = null;
+                            document.onmousemove = null;
+                        }
+
+                        function getHeader(element) {
+                            var headerItems = element.getElementsByClassName("popup-header");
+
+                            if (headerItems.length === 1) {
+                                return headerItems[0];
+                            }
+
+                            return null;
+                        }
+                    }
+
+                    function initResizeElement() {
+                        var popups = document.getElementsByClassName("popup");
+                        var element = null;
+                        var startX,
+                            startY,
+                            startWidth,
+                            startHeight;
+
+                        for (var i = 0; i < popups.length; i++) {
+                            var p = popups[i];
+
+                            var right = document.createElement("div");
+                            right.className = "resizer-right";
+                            p.appendChild(right);
+                            right.addEventListener("mousedown", initDrag, false);
+                            right.parentPopup = p;
+
+                            var bottom = document.createElement("div");
+                            bottom.className = "resizer-bottom";
+                            p.appendChild(bottom);
+                            bottom.addEventListener("mousedown", initDrag, false);
+                            bottom.parentPopup = p;
+
+                            var both = document.createElement("div");
+                            both.className = "resizer-both";
+                            p.appendChild(both);
+                            both.addEventListener("mousedown", initDrag, false);
+                            both.parentPopup = p;
+                        }
+
+                        function initDrag(e) {
+                            element = this.parentPopup;
+
+                            startX = e.clientX;
+                            startY = e.clientY;
+                            startWidth = parseInt(document.defaultView.getComputedStyle(element).width, 10);
+                            startHeight = parseInt(document.defaultView.getComputedStyle(element).height, 10);
+                            document.documentElement.addEventListener("mousemove", doDrag, false);
+                            document.documentElement.addEventListener("mouseup", stopDrag, false);
+                        }
+
+                        function doDrag(e) {
+                            element.style.width = startWidth + e.clientX - startX + "px";
+                            element.style.height = startHeight + e.clientY - startY + "px";
+                        }
+
+                        function stopDrag() {
+                            document.documentElement.removeEventListener("mousemove", doDrag, false);
+                            document.documentElement.removeEventListener("mouseup", stopDrag, false);
+                        }
+                    }
+                </script>
+                <script>
+
+                    function fullscreen(id) {
+                        const item = document.getElementById(id);
+                        if (item.classList.contains('application-fullscreen')) {
+                            item.classList.remove('application-fullscreen');
+                        } else {
+                            item.classList.add('application-fullscreen');
+                        }
+                    }
+
+                    function showItem(id) {
+                        const item = document.getElementById(id);
+                        if (item) {
+                            if (item.style.display === 'none' || item.style.display === '') {
+                                item.style.display = 'block'; // Show the start menu
+                            } else {
+                                item.style.display = 'none'; // Hide the start menu
+                            }
+                        }
+                    }
+
+                    function showInlineItem(id) {
+                        const item = document.getElementById(id);
+                        if (item) {
+                            item.style.display = 'inline-block'; // Always set to 'inline-block' explicitly
+                        }
+                    }
+                    function toggleActive(task, window) {
+                        item = document.getElementById(task);
+                        if (item.classList.contains('active-task')) {
+                            item.classList.remove('active-task');
+                        } else {
+                            item.classList.add('active-task');
+                        } showItem(window);
+                    }
+                    function openApplication(window, task) {
+                        showItem(window); // Ensure 'window' is a valid ID
+                        showInlineItem(task); // Ensure 'task' is a valid ID
+                        toggleActive(task);
+                    }
+
+                    function closeApplication(windowId, taskId) {
+                        const windowElement = document.getElementById(windowId);
+                        const taskElement = document.getElementById(taskId);
+
+                        if (windowElement) 
+                            windowElement.style.display = 'none';
+                        
+
+                        if (taskElement) {
+                            taskElement.classList.remove('active-task');
+                            taskElement.style.display = 'none'; // Hide the task completely
+                        }
+                    }
+
+                    function minimizeApplication(windowId, taskId) {
+                        const windowElement = document.getElementById(windowId);
+                        const taskElement = document.getElementById(taskId);
+
+                        if (windowElement) 
+                            windowElement.style.display = 'none';
+                        
+                        // Hide the window
+                        if (taskElement) {
+                            taskElement.classList.add('active-task'); // Keep the task active
+                            taskElement.style.display = 'inline-block'; // Ensure the task remains visible
+                        }
+                    }
+                </script>
+            </body>
+        </html>
+
