@@ -121,17 +121,25 @@
 <div id="app"></div>
 
 <div id="desktop">
-    <div id="minesweeper-desktop-app" class="application" onclick="openApplication('minesweeper', 'minesweeper-task')">
+    <div id="days-desktop-app" class="application" onclick="openApplication('days', 'days-task')">
         <img src="./images/calendar-0.png" class="application-icon"/>
         <div class="application-title">
-            Days Since meeting you
+            Days Since Meeting You
         </div>
     </div>
 
-    <div id="days-desktop-app" class="application" onclick="openApplication('minesweeper', 'minesweeper-task')">
+    <div id="days-desktop-app" class="application" onclick="openApplication('map', 'map-task')">
         <img src="./images/world-4.png" class="application-icon"/>
         <div class="application-title">
-            map
+            Where We Met
+        </div>
+    </div>
+
+    <!-- soppy message-->
+    <div id="message-desktop-app" class="application" onclick="openApplication('message', 'message-task')">
+        <img src="./images/mail.ico" class="application-icon"/>
+        <div class="application-title">
+            Soppy Message
         </div>
     </div>
     <!-- My Computer -->
@@ -155,22 +163,6 @@
             Projects
         </div>
     </div>
-    <!-- More -->
-
-    <div class="application" onclick="openApplication('explorer', 'explorer-task')">
-        <img src="./images/directory_open_file_mydocs.ico" class="application-icon"/>
-        <div class="application-title">
-            More
-        </div>
-    </div>
-    <!-- Contact -->
-    <div class="application">
-        <img src="./images/mail.ico" class="application-icon"/>
-        <div class="application-title">
-            Contact Me
-        </div>
-    </div>
-
 </div>
 
 
@@ -196,7 +188,7 @@
         </div>
 
         <!-- days -->
-        <div id="minesweeper-task" class="task active-task" onclick="toggleActive('minesweeper-task', 'minesweeper')">
+        <div id="days-task" class="task active-task" onclick="toggleActive('days-task', 'days')">
             <img class="task-icon" src="./images/calendar-0.png"/>
             <div class="task-text">
                 Days since
@@ -207,18 +199,17 @@
         <div id="message-task" class="task active-task" onclick="toggleActive('message-task', 'message')">
             <img class="task-icon" src="./images/mail.ico"/>
             <div class="task-text">
-                soppy message
+                soppy Message
             </div>
         </div>
 
-          <!-- Map-->
-          <div id="message-task" class="task active-task" onclick="toggleActive('minesweeper-task', 'minesweeper')">
-            <img class="task-icon" src="./images/mail.ico"/>
+        <!-- Map-->
+        <div id="map-task" class="task active-task" onclick="toggleActive('map-task', 'map')">
+            <img class="task-icon" src="./images/world-4.png"/>
             <div class="task-text">
-                soppy message
+                Where We Met
             </div>
         </div>
-
 
 
         <!-- Notifications & Clock -->
@@ -245,7 +236,8 @@
             <!-- Documents -->
             <div class="start-menu-button">
                 <img src="./images/directory_open_file_mydocs.ico" class="start-menu-button-icon" style="width:26px; margin-left:5px; margin-right:4px;"/>
-                <div class="start-menu-button-label" style="margin-top:8px;">Happy </div>
+                <div class="start-menu-button-label" style="margin-top:8px;">Happy
+                </div>
             </div>
             <!-- Find -->
             <div class="start-menu-button">
@@ -275,53 +267,81 @@
         </div>
     </div>
 
-    <!-- Minesweeper Application Window -->
+    <!-- days Application Window -->
     <div
-        id="minesweeper" class="window active-window application-window popup" style="display : none">
+        id="days" class="window active-window application-window popup" style="display : none">
         <!--  ui-widget-content ui-draggableui-widget-content ui-draggable  -->
         <div class="window-border">
             <div class="title-bar h-count ui-draggable-handle popup-header" id="parent">
                 <img class="icon" src="./images/calendar-0.png"/>
                 <div class="control-box">
-                    <a class="button-3d minimize" onclick="minimizeApplication('minesweeper', 'minesweeper-task')">
+                    <a class="button-3d minimize" onclick="minimizeApplication('days', 'days-task')">
                         <span>&nbsp;</span>
                     </a>
-                    <a class="button-3d maximize" onclick="fullscreen('minesweeper')">
+                    <a class="button-3d maximize" onclick="fullscreen('days')">
                         <span>&nbsp;</span>
                     </a>
-                    <a class="button-3d close" onclick="closeApplication('minesweeper', 'minesweeper-task')">
+                    <a class="button-3d close" onclick="closeApplication('days', 'days-task')">
                         <span>&nbsp;</span>
                     </a>
                 </div>
                 <span class="title">Days Since we met</span>
             </div>
             <div class="clear"></div>
-            <div id="minesweeper-content">
-                <iframe src="./days.html" id="mine-frame" scrolling="no"></iframe>
+            <div id="days-content">
+                <iframe src="./days.html" id="days-frame" scrolling="no"></iframe>
+            </div>
+        </div>
+    </div>
+    <!-- map app -->
+    <div id="map" class="window active-window application-window popup" style="display : none">
+        <div class="window-border">
+            <div class="title-bar h-count ui-draggable-handle popup-header" id="parent">
+                <img class="icon" src="./images/world-4.png"/>
+                <div class="control-box">
+                    <a class="button-3d minimize" onclick="toggleActive('map-task', 'map')">
+                        <span>&nbsp;</span>
+                    </a>
+                    <a class="button-3d maximize" onclick="fullscreen('map')">
+                        <span>&nbsp;</span>
+                    </a>
+                    <a class="button-3d close" onclick="closeApplication('map', 'map-task')">
+                        <span>&nbsp;</span>
+                    </a>
+                </div>
+                <span class="title">Where we met</span>
+            </div>
+            <div class="clear"></div>
+            <div id="map-content">
+                <iframe src="./map.html" id="mine-frame" scrolling="no"></iframe>
             </div>
         </div>
     </div>
 
-    <!-- 
-        <div id="minesweeper1" class="window active-window application-window " style="display : none">
-            <!--  ui-widget-content ui-draggableui-widget-content ui-draggable  
-            <div class="window-border">
-                <div class="title-bar h-count ui-draggable-handle" id="parent">
-                    <img class="icon" src="./images/calendar-0.png" />
-                    <div class="control-box">
-                        <a class="button-3d minimize" onclick="toggleActive('minesweeper-task', 'minesweeper')"><span>&nbsp;</span></a>
-                        <a class="button-3d maximize" onclick="fullscreen('minesweeper')"><span>&nbsp;</span></a>
-                        <a class="button-3d close" onclick="closeApplication('minesweeper', 'minesweeper-task')"><span>&nbsp;</span></a>
-                    </div>
-                    <span class="title">Days Since we met</span>
+    <!-- message app -->
+    <div id="message" class="window active-window application-window popup" style="display : none">
+        <div class="window-border">
+            <div class="title-bar h-count ui-draggable-handle popup-header" id="parent">
+                <img class="icon" src="./images/mail.ico"/>
+                <div class="control-box">
+                    <a class="button-3d minimize" onclick="toggleActive('message-task', 'message')">
+                        <span>&nbsp;</span>
+                    </a>
+                    <a class="button-3d maximize" onclick="fullscreen('message')">
+                        <span>&nbsp;</span>
+                    </a>
+                    <a class="button-3d close" onclick="closeApplication('message', 'message-task')">
+                        <span>&nbsp;</span>
+                    </a>
                 </div>
-                <div class="clear"></div>
-                <div id="minesweeper-content">
-                    <iframe src="./days.html" id="mine-frame" scrolling="no" ></iframe>
-                </div>
+                <span class="title">Soppy Message</span>
+            </div>
+            <div class="clear"></div>
+            <div id="message-content">
+                <iframe src="./marquee.html" id="message-frame" scrolling="no"></iframe>
             </div>
         </div>
-        -->
+    </div>
 
 
     <script>
@@ -452,51 +472,32 @@
     </script>
     <script>
 
-        function fullscreen(id) {
-            var h = document.getElementById("desktop").offsetHeight;
-            var w = document.getElementById("desktop").offsetWidth;
-            item = document.getElementById(id);
-            if (item.classList.contains('application-fullscreen')) {
-                item.classList.remove('application-fullscreen');
-                if (id == 'minesweeper') {
-                    item.style.top = "73.4px";
-                    item.style.left = "512px";
-                    item.style.height = "440.4px";
-                    document.getElementById("minesweeper-content").style.height = "auto";
-                    document.getElementById("minesweeper-content").style.width = "auto";
-                } else if (id == 'explorer') {
-                    document.getElementById("explorer-content").style.height = "auto";
-                    document.getElementById("explorer-content").style.width = "auto";
-                }
-            } else {
-                item.classList.add('application-fullscreen');
-                if (id == 'minesweeper') {
-                    document.getElementById("minesweeper-content").style.height = h + "px";
-                    document.getElementById("minesweeper-content").style.width = w + "px";
-                } else if (id == 'explorer') {
-                    document.getElementById("explorer-content").style.height = h + "px";
-                    document.getElementById("explorer-content").style.width = w + "px";
+function fullscreen(id) {
+    const item = document.getElementById(id);
+    if (item.classList.contains('application-fullscreen')) {
+        item.classList.remove('application-fullscreen');
+    } else {
+        item.classList.add('application-fullscreen');
+    }
+}
+
+        function showItem(id) {
+            const item = document.getElementById(id);
+            if (item) {
+                if (item.style.display === 'none' || item.style.display === '') {
+                    item.style.display = 'block'; // Show the start menu
+                } else {
+                    item.style.display = 'none'; // Hide the start menu
                 }
             }
         }
 
-        function showItem(id) {
-    const item = document.getElementById(id);
-    if (item) {
-        if (item.style.display === 'none' || item.style.display === '') {
-            item.style.display = 'block'; // Show the start menu
-        } else {
-            item.style.display = 'none'; // Hide the start menu
+        function showInlineItem(id) {
+            const item = document.getElementById(id);
+            if (item) {
+                item.style.display = 'inline-block'; // Always set to 'inline-block' explicitly
+            }
         }
-    }
-}
-
-function showInlineItem(id) {
-    const item = document.getElementById(id);
-    if (item) {
-        item.style.display = 'inline-block'; // Always set to 'inline-block' explicitly
-    }
-}
         function toggleActive(task, window) {
             item = document.getElementById(task);
             if (item.classList.contains('active-task')) {
@@ -510,30 +511,33 @@ function showInlineItem(id) {
             showInlineItem(task); // Ensure 'task' is a valid ID
             toggleActive(task);
         }
-    
-    function closeApplication(windowId, taskId) {
-    const windowElement = document.getElementById(windowId);
-    const taskElement = document.getElementById(taskId);
 
-    if (windowElement) windowElement.style.display = 'none';
-    if (taskElement) {
-        taskElement.classList.remove('active-task');
-        taskElement.style.display = 'none'; // Hide the task completely
-    }
-}
+        function closeApplication(windowId, taskId) {
+            const windowElement = document.getElementById(windowId);
+            const taskElement = document.getElementById(taskId);
 
-    function minimizeApplication(windowId, taskId) {
-    const windowElement = document.getElementById(windowId);
-    const taskElement = document.getElementById(taskId);
+            if (windowElement) 
+                windowElement.style.display = 'none';
+            
+            if (taskElement) {
+                taskElement.classList.remove('active-task');
+                taskElement.style.display = 'none'; // Hide the task completely
+            }
+        }
 
-    if (windowElement) windowElement.style.display = 'none'; // Hide the window
-    if (taskElement) {
-        taskElement.classList.add('active-task'); // Keep the task active
-        taskElement.style.display = 'inline-block'; // Ensure the task remains visible
-    }
+        function minimizeApplication(windowId, taskId) {
+            const windowElement = document.getElementById(windowId);
+            const taskElement = document.getElementById(taskId);
+
+            if (windowElement) 
+                windowElement.style.display = 'none';
+             // Hide the window
+            if (taskElement) {
+                taskElement.classList.add('active-task'); // Keep the task active
+                taskElement.style.display = 'inline-block'; // Ensure the task remains visible
+            }
 
 
-}
+        }
     </script>
-</body>
-</html>
+</body></body></html>
