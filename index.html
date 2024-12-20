@@ -110,11 +110,21 @@
 
 <body onload="startTime()">
 <div id="app"></div>
-<div id="days">
-  <!----   <iframe src="./days.html"></iframe> -->
-</div>
 
  <div id="desktop">
+     <div id="minesweeper-desktop-app" class="application" onclick="openApplication('minesweeper', 'minesweeper-task')">
+            <img src="./images/calendar-0.png" class="application-icon" />
+            <div class="application-title">
+                Days Since meeting you
+            </div>
+      </div>
+
+      <div id="days-desktop-app" class="application" onclick="openApplication('minesweeper', 'minesweeper-task')">
+        <img src="./images/world-4.png" class="application-icon" />
+        <div class="application-title">
+            map
+        </div>
+  </div>
         <!-- My Computer -->
         <div class="application">
             <img src="./images/computer_explorer.ico" class="application-icon" />
@@ -152,13 +162,6 @@
             </div>
         </div>
 
-        <div id="minesweeper-desktop-app" class="application" onclick="openApplication('minesweeper', 'minesweeper-task')">
-            <!--  onclick="openApplication('minesweeper', 'minesweeper-task')" -->
-            <img src="./images/minesweeper.ico" class="application-icon" />
-            <div class="application-title">
-                Minesweeper
-            </div>
-      </div>
  </div>
 
     
@@ -172,18 +175,16 @@
     <div id="task-container">
         <!-- Minesweeper -->
         <div id="minesweeper-task" class="task active-task" onclick="toggleActive('minesweeper-task', 'minesweeper')">
-            <img class="task-icon" src="./images/minesweeper.ico" />
+            <img class="task-icon" src="./images/calendar-0.png" />
             <div class="task-text">
-                Minesweeper
+                Days since
             </div>
+        </div> 
+        <!-- music-->
+        <div id ="music-task" class= "task active-task"  >
+            <img class="task-icon" src="./images/calendar-0.png" />
+            <div class="task-text">
         </div>
-        <!-- Explorer -->
-        <div id="explorer-task" class="task active-task" onclick="toggleActive('explorer-task', 'explorer')">
-            <img class="task-icon" src="./images/directory_closed.ico" />
-            <div class="task-text">
-                Explorer
-            </div>
-        </div>   
     </div>
     <!-- Notifications & Clock -->
     <div id="notification-tray">
@@ -239,23 +240,21 @@
 </div>
 
 <!-- Minesweeper Application Window -->
-<div id="minesweeper" class="window active-window application-window" program-name="minesweeper" pid="1">
+<div id="minesweeper" class="window active-window application-window" program-name="minesweeper" pid="1" style="display : none">
     <!--  ui-widget-content ui-draggableui-widget-content ui-draggable  -->
     <div class="window-border">
         <div class="title-bar h-count ui-draggable-handle" id="parent">
-            <img class="icon" src="./images/minesweeper.ico" />
+            <img class="icon" src="./images/calendar-0.png" />
             <div class="control-box">
                 <a class="button-3d minimize" onclick="toggleActive('minesweeper-task', 'minesweeper')"><span>&nbsp;</span></a>
                 <a class="button-3d maximize" onclick="fullscreen('minesweeper')"><span>&nbsp;</span></a>
                 <a class="button-3d close" onclick="closeApplication('minesweeper', 'minesweeper-task')"><span>&nbsp;</span></a>
             </div>
-            <span class="title">Minesweeper</span>
+            <span class="title">Days Since we met</span>
         </div>
         <div class="clear"></div>
         <div id="minesweeper-content">
-            <!--<iframe src="http://minesweeper.tenmore.solutions/" id="mine-frame" scrolling="no"></iframe>-->
-            <!-- width="270" height="375" -->
-            <iframe src="./days.html" id="mine-frame" scrolling="no"></iframe>
+            <iframe src="./days.html" id="mine-frame" scrolling="no" ></iframe>
         </div>
     </div>
 </div>
@@ -299,7 +298,7 @@
     }
 </script>
 <script>
-    //document.getElementById('minesweeper-desktop-app').onclick = openApplication('minesweeper', 'minesweeper-task');
+    
     function fullscreen(id) {
         var h = document.getElementById("desktop").offsetHeight;
         var w = document.getElementById("desktop").offsetWidth;
