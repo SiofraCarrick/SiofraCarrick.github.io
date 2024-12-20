@@ -1,86 +1,100 @@
 <!DOCTYPE html>
 <html>
-<head>
+    <head>
 
-    <title>Cool Zone </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/x-icon" href="./images/fav.ico">
+        <title>Cool Zone
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8"/>
+        <link rel="icon" type="image/x-icon" href="./images/fav.ico">
 
-    <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="./application.css">
+        <link rel="stylesheet" href="./style.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="./application.css">
 
-</head>
+    </head>
 
-<script src="https://unpkg.com/webamp@1.5.0/built/webamp.bundle.min.js"></script>
-<script src="https://unpkg.com/butterchurn@2.6.7/lib/butterchurn.min.js"></script>
-<script src="https://unpkg.com/butterchurn-presets@2.4.7/lib/butterchurnPresets.min.js"></script>
-<script>
-   document.addEventListener("DOMContentLoaded", () => {
-    const app = document.getElementById("app");
+    <script src="https://unpkg.com/webamp@1.5.0/built/webamp.bundle.min.js"></script>
+    <script src="https://unpkg.com/butterchurn@2.6.7/lib/butterchurn.min.js"></script>
+    <script src="https://unpkg.com/butterchurn-presets@2.4.7/lib/butterchurnPresets.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const app = document.getElementById("app");
+            startTime();
 
-    if (!app) {
-      console.error("Webamp container #app is not found.");
-      return;
-    }
+            if (! app) {
+                console.error("Webamp container #app is not found.");
+                return;
+            }
 
-    const webamp = new Webamp({
-      initialTracks: [
-        {
-          // Ensure the file is served properly with CORS settings if needed
-          url: "./music/Song.mp3",
-        },
-      ],
-      __butterchurnOptions: {
-        importButterchurn: () => Promise.resolve(window.butterchurn),
-        getPresets: () => {
-          const presets = window.butterchurnPresets.getPresets();
-          return Object.keys(presets).map((name) => {
-            return {
-              name,
-              butterchurnPresetObject: presets[name],
-            };
-          });
-        },
-        butterchurnOpen: true,
-      },
-      windowLayout: {
-        main: { position: { top: 0, left: 0 } },
-        equalizer: { position: { top: 116, left: 0 } },
-        milkdrop: {
-          position: { top: 0, left: 275 },
-          size: { extraHeight: 12, extraWidth: 7 },
-        },
-      },
-    });
+            const webamp = new Webamp({
+                initialTracks: [
+                    { // Ensure the file is served properly with CORS settings if needed
+                        url: "./music/Song.mp3"
+                    },
+                ],
+                __butterchurnOptions: {
+                    importButterchurn: () => Promise.resolve(window.butterchurn),
+                    getPresets: () => {
+                        const presets = window.butterchurnPresets.getPresets();
+                        return Object.keys(presets).map((name) => {
+                            return {name, butterchurnPresetObject: presets[name]};
+                        });
+                    },
+                    butterchurnOpen: true
+                },
+                windowLayout: {
+                    main: {
+                        position: {
+                            top: 0,
+                            left: 0
+                        }
+                    },
+                    equalizer: {
+                        position: {
+                            top: 116,
+                            left: 0
+                        }
+                    },
+                    milkdrop: {
+                        position: {
+                            top: 0,
+                            left: 275
+                        },
+                        size: {
+                            extraHeight: 12,
+                            extraWidth: 7
+                        }
+                    }
+                }
+            });
 
-    webamp.renderWhenReady(app);
-  });
+            webamp.renderWhenReady(app);
+        });
 
-    function startTime() {
+        function startTime() {
             var today = new Date();
             var h = today.getHours();
             var m = today.getMinutes();
             var p = " AM";
             p = getPeriod(h, p);
             m = checkTime(m);
-            h = formatTime(h);            
-            document.getElementById('clock').innerHTML =
-                h + ":" + m + p;
-                console.log(h+":" + m + p)
+            h = formatTime(h);
+            document.getElementById('clock').innerHTML = h + ":" + m + p;
+            console.log(h + ":" + m + p)
             var t = setTimeout(startTime, 500);
         }
         function checkTime(i) {
-            if (i < 10) { i = "0" + i };
+            if (i < 10) {
+                i = "0" + i
+            };
             return i;
         }
         function formatTime(t) {
             if (t > 12) {
                 t = (t - 12);
                 return t;
-            }
-            else {
+            } else {
                 return t;
             }
         }
@@ -88,8 +102,7 @@
             if (hr > 12) {
                 pd = " PM";
                 return pd;
-            }
-            else {
+            } else {
                 pd = " AM";
                 return pd;
             }
@@ -99,278 +112,394 @@
             item = document.getElementById(id);
             if (item.style.display == 'none') {
                 item.style.display = 'block';
-            }
-            
-            else {
+            } else {
                 item.style.display = 'none';
             }
         }
     </script>
-</script>
-
-<body onload="startTime()">
+</html></script><body>
 <div id="app"></div>
 
- <div id="desktop">
-     <div id="minesweeper-desktop-app" class="application" onclick="openApplication('minesweeper', 'minesweeper-task')">
-            <img src="./images/calendar-0.png" class="application-icon" />
-            <div class="application-title">
-                Days Since meeting you
-            </div>
-      </div>
+<div id="desktop">
+    <div id="minesweeper-desktop-app" class="application" onclick="openApplication('minesweeper', 'minesweeper-task')">
+        <img src="./images/calendar-0.png" class="application-icon"/>
+        <div class="application-title">
+            Days Since meeting you
+        </div>
+    </div>
 
-      <div id="days-desktop-app" class="application" onclick="openApplication('minesweeper', 'minesweeper-task')">
-        <img src="./images/world-4.png" class="application-icon" />
+    <div id="days-desktop-app" class="application" onclick="openApplication('minesweeper', 'minesweeper-task')">
+        <img src="./images/world-4.png" class="application-icon"/>
         <div class="application-title">
             map
         </div>
-  </div>
-        <!-- My Computer -->
-        <div class="application">
-            <img src="./images/computer_explorer.ico" class="application-icon" />
-            <div class="application-title">
-                My Computer
-            </div>
+    </div>
+    <!-- My Computer -->
+    <div class="application">
+        <img src="./images/computer_explorer.ico" class="application-icon"/>
+        <div class="application-title">
+            My Computer
         </div>
-        <!-- About Me -->
-        <div class="application">
-            <img src="./images/notepad.ico" class="application-icon" />
-            <div class="application-title">
-                About Me
-            </div>
+    </div>
+    <!-- About Me -->
+    <div class="application">
+        <img src="./images/notepad.ico" class="application-icon"/>
+        <div class="application-title">
+            About Me
         </div>
-        <!-- Projects -->
-        <div class="application">
-            <img src="./images/directory_closed.ico" class="application-icon" />
-            <div class="application-title">
-                Projects
-            </div>
+    </div>
+    <!-- Projects -->
+    <div class="application">
+        <img src="./images/directory_closed.ico" class="application-icon"/>
+        <div class="application-title">
+            Projects
         </div>
-        <!-- More -->
-        
-        <div class="application" onclick="openApplication('explorer', 'explorer-task')">
-            <img src="./images/directory_open_file_mydocs.ico" class="application-icon" />
-            <div class="application-title">
-                More
-            </div>
-        </div>
-        <!-- Contact -->
-        <div class="application">
-            <img src="./images/mail.ico" class="application-icon" />
-            <div class="application-title">
-                Contact Me
-            </div>
-        </div>
+    </div>
+    <!-- More -->
 
- </div>
+    <div class="application" onclick="openApplication('explorer', 'explorer-task')">
+        <img src="./images/directory_open_file_mydocs.ico" class="application-icon"/>
+        <div class="application-title">
+            More
+        </div>
+    </div>
+    <!-- Contact -->
+    <div class="application">
+        <img src="./images/mail.ico" class="application-icon"/>
+        <div class="application-title">
+            Contact Me
+        </div>
+    </div>
 
-    
-<div id="taskbar">
+</div>
+
+
+<div
+    id="taskbar">
     <!-- Start Button -->
-    <div id="start-button" onclick="showItem('start-menu')" >            
-        <img src="./images/windows.ico" id="windows-icon" />
+    <div id="start-button" onclick="showItem('start-menu')">
+        <img src="./images/windows.ico" id="windows-icon"/>
         <div id="start-button-text">Start</div>
     </div>
+
+
     <!-- Open Applications in the Taskbar -->
-    <div id="task-container">
-        <!-- Minesweeper -->
-        <div id="minesweeper-task" class="task active-task" onclick="toggleActive('minesweeper-task', 'minesweeper')">
-            <img class="task-icon" src="./images/calendar-0.png" />
-            <div class="task-text">
-                Days since
-            </div>
-        </div> 
+    <div
+        id="task-container">
+
         <!-- music-->
-        <div id ="music-task" class= "task active-task"  >
-            <img class="task-icon" src="./images/calendar-0.png" />
+        <div id="music-task" class="task active-task" style="display : block">
+            <img class="task-icon" src="./images/win.png"/>
             <div class="task-text">
-        </div>
-    </div>
-    <!-- Notifications & Clock -->
-    <div id="notification-tray">
-        <img src="./images/volume.ico" id="volume-icon" />
-        <div id="clock"></div>
-    </div>
-</div>
-
-<div id="start-menu">
-  <div id="system-name">Windows 98</div>
-  <div id="start-menu-button-container">
-      <!-- Programs -->
-      <div id="programs" class="start-menu-button">
-          <img src="./images/directory_program_group_small.ico" class="start-menu-button-icon" />
-          <div class="start-menu-button-label">Programs</div>
-      </div>        
-      <!-- Favorites -->
-      <div class="start-menu-button">
-          <img src="./images/directory_favorites_small.ico" class="start-menu-button-icon" />
-          <div class="start-menu-button-label">Favorites</div>
-      </div>
-      <!-- Documents -->
-      <div class="start-menu-button">
-          <img src="./images/directory_open_file_mydocs.ico" class="start-menu-button-icon" style="width:26px; margin-left:5px; margin-right:4px;" />
-          <div class="start-menu-button-label" style="margin-top:8px;">Documents</div>
-      </div>
-      <!-- Find -->
-      <div class="start-menu-button">
-          <img src="./images/search_file_2.ico" class="start-menu-button-icon" />
-          <div class="start-menu-button-label">Find</div>
-      </div>
-      <!-- Run -->
-      <div class="start-menu-button">
-          <img src="./images/application_hourglass_small.ico" class="start-menu-button-icon" />
-          <div class="start-menu-button-label">Run</div>
-      </div>
-      <!-- Help -->
-      <div class="start-menu-button">
-          <img src="./images/help_book_small.ico" class="start-menu-button-icon" />
-          <div class="start-menu-button-label">Help</div>
-      </div>
-      <!-- Log Off -->
-      <div class="start-menu-button">
-          <img src="./images/key_win.ico" class="start-menu-button-icon" />
-          <div class="start-menu-button-label">Log Off</div>
-      </div>
-      <!-- Shut Down -->
-      <div class="start-menu-button">
-          <img src="./images/shut_down_cool.ico" class="start-menu-button-icon" />
-          <div class="start-menu-button-label">Shut Down</div>
-      </div>
-  </div>
-</div>
-
-<!-- Minesweeper Application Window -->
-<div id="minesweeper" class="window active-window application-window" program-name="minesweeper" pid="1" style="display : none">
-    <!--  ui-widget-content ui-draggableui-widget-content ui-draggable  -->
-    <div class="window-border">
-        <div class="title-bar h-count ui-draggable-handle" id="parent">
-            <img class="icon" src="./images/calendar-0.png" />
-            <div class="control-box">
-                <a class="button-3d minimize" onclick="toggleActive('minesweeper-task', 'minesweeper')"><span>&nbsp;</span></a>
-                <a class="button-3d maximize" onclick="fullscreen('minesweeper')"><span>&nbsp;</span></a>
-                <a class="button-3d close" onclick="closeApplication('minesweeper', 'minesweeper-task')"><span>&nbsp;</span></a>
+                Win amp
             </div>
-            <span class="title">Days Since we met</span>
+            <!-- Minesweeper -->
+            <div id="minesweeper-task" class="task active-task" onclick="toggleActive('minesweeper-task', 'minesweeper')">
+                <img class="task-icon" src="./images/calendar-0.png"/>
+                <div class="task-text">
+                    Days since
+                </div>
+            </div>
+
         </div>
-        <div class="clear"></div>
-        <div id="minesweeper-content">
-            <iframe src="./days.html" id="mine-frame" scrolling="no" ></iframe>
+        <!-- Notifications & Clock -->
+        <div id="notification-tray">
+            <img src="./images/volume.ico" id="volume-icon"/>
+            <div id="clock"></div>
         </div>
     </div>
-</div>
+
+    <div id="start-menu">
+        <div id="system-name">Windows 98</div>
+        <div
+            id="start-menu-button-container">
+            <!-- Programs -->
+            <div id="programs" class="start-menu-button">
+                <img src="./images/directory_program_group_small.ico" class="start-menu-button-icon"/>
+                <div class="start-menu-button-label">Programs</div>
+            </div>
+            <!-- Favorites -->
+            <div class="start-menu-button">
+                <img src="./images/directory_favorites_small.ico" class="start-menu-button-icon"/>
+                <div class="start-menu-button-label">Favorites</div>
+            </div>
+            <!-- Documents -->
+            <div class="start-menu-button">
+                <img src="./images/directory_open_file_mydocs.ico" class="start-menu-button-icon" style="width:26px; margin-left:5px; margin-right:4px;"/>
+                <div class="start-menu-button-label" style="margin-top:8px;">Documents</div>
+            </div>
+            <!-- Find -->
+            <div class="start-menu-button">
+                <img src="./images/search_file_2.ico" class="start-menu-button-icon"/>
+                <div class="start-menu-button-label">Find</div>
+            </div>
+            <!-- Run -->
+            <div class="start-menu-button">
+                <img src="./images/application_hourglass_small.ico" class="start-menu-button-icon"/>
+                <div class="start-menu-button-label">Run</div>
+            </div>
+            <!-- Help -->
+            <div class="start-menu-button">
+                <img src="./images/help_book_small.ico" class="start-menu-button-icon"/>
+                <div class="start-menu-button-label">Help</div>
+            </div>
+            <!-- Log Off -->
+            <div class="start-menu-button">
+                <img src="./images/key_win.ico" class="start-menu-button-icon"/>
+                <div class="start-menu-button-label">Log Off</div>
+            </div>
+            <!-- Shut Down -->
+            <div class="start-menu-button">
+                <img src="./images/shut_down_cool.ico" class="start-menu-button-icon"/>
+                <div class="start-menu-button-label">Shut Down</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Minesweeper Application Window -->
+    <div
+        id="minesweeper" class="window active-window application-window popup" style="display : none">
+        <!--  ui-widget-content ui-draggableui-widget-content ui-draggable  -->
+        <div class="window-border">
+            <div class="title-bar h-count ui-draggable-handle popup-header" id="parent">
+                <img class="icon" src="./images/calendar-0.png"/>
+                <div class="control-box">
+                    <a class="button-3d minimize" onclick="toggleActive('minesweeper-task', 'minesweeper')">
+                        <span>&nbsp;</span>
+                    </a>
+                    <a class="button-3d maximize" onclick="fullscreen('minesweeper')">
+                        <span>&nbsp;</span>
+                    </a>
+                    <a class="button-3d close" onclick="closeApplication('minesweeper', 'minesweeper-task')">
+                        <span>&nbsp;</span>
+                    </a>
+                </div>
+                <span class="title">Days Since we met</span>
+            </div>
+            <div class="clear"></div>
+            <div id="minesweeper-content">
+                <iframe src="./days.html" id="mine-frame" scrolling="no"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- 
+    <div id="minesweeper1" class="window active-window application-window " style="display : none">
+        <!--  ui-widget-content ui-draggableui-widget-content ui-draggable  
+        <div class="window-border">
+            <div class="title-bar h-count ui-draggable-handle" id="parent">
+                <img class="icon" src="./images/calendar-0.png" />
+                <div class="control-box">
+                    <a class="button-3d minimize" onclick="toggleActive('minesweeper-task', 'minesweeper')"><span>&nbsp;</span></a>
+                    <a class="button-3d maximize" onclick="fullscreen('minesweeper')"><span>&nbsp;</span></a>
+                    <a class="button-3d close" onclick="closeApplication('minesweeper', 'minesweeper-task')"><span>&nbsp;</span></a>
+                </div>
+                <span class="title">Days Since we met</span>
+            </div>
+            <div class="clear"></div>
+            <div id="minesweeper-content">
+                <iframe src="./days.html" id="mine-frame" scrolling="no" ></iframe>
+            </div>
+        </div>
+    </div>
+    -->
 
 
-<script>
-    dragElement(document.getElementById(("minesweeper")));
-    function dragElement(elmnt) {
-        var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-        if (document.getElementById(elmnt.id + "header")) {
-            /* if present, the header is where you move the DIV from:*/
-            document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
-        } else { /* otherwise, move the DIV from anywhere inside the DIV:*/                
-            elmnt.onmousedown = dragMouseDown;
-        }
-        function dragMouseDown(e) {
-            e = e || window.event;
-            // get the mouse cursor position at startup:
-            pos3 = e.clientX;
-            pos4 = e.clientY;
-            document.onmouseup = closeDragElement;
-            // call a function whenever the cursor moves:
-            document.onmousemove = elementDrag;
-        }
-        function elementDrag(e) {
-            e = e || window.event;
-            // calculate the new cursor position:
-            pos1 = pos3 - e.clientX;
-            pos2 = pos4 - e.clientY;
-            pos3 = e.clientX;
-            pos4 = e.clientY;
-            // set the element's new position:
-            elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-            elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-        }
-        function closeDragElement() {
-            /* stop moving when mouse button is released:*/
-            document.onmouseup = null;
-            document.onmousemove = null;
-        }
-    }
-</script>
-<script>
-    
-    function fullscreen(id) {
-        var h = document.getElementById("desktop").offsetHeight;
-        var w = document.getElementById("desktop").offsetWidth;
-        item = document.getElementById(id);
-        if (item.classList.contains('application-fullscreen')) {
-            item.classList.remove('application-fullscreen');
-            if (id == 'minesweeper') {
-                item.style.top = "73.4px";
-                item.style.left = "512px";
-                item.style.height = "440.4px";
-                document.getElementById("minesweeper-content").style.height = "auto";
-                document.getElementById("minesweeper-content").style.width = "auto";
-            }
-            else if (id == 'explorer') {
-                document.getElementById("explorer-content").style.height = "auto";
-                document.getElementById("explorer-content").style.width = "auto";
-            }                
-        }
-        else {
-            item.classList.add('application-fullscreen');
-            if (id == 'minesweeper') {
-                document.getElementById("minesweeper-content").style.height = h + "px";
-                document.getElementById("minesweeper-content").style.width = w + "px";
-            }
-            else if (id == 'explorer') {
-                document.getElementById("explorer-content").style.height = h + "px";
-                document.getElementById("explorer-content").style.width = w + "px";
-            }
-        }
-    }
-    function showItem(id) {
-        item = document.getElementById(id);
-        if (item.style.display == 'none') {
-            item.style.display = 'block';
-        }
-        
-        else {
-            item.style.display = 'none';
-        }
-    }
-    function showInlineItem(id) {
-        item = document.getElementById(id);
-        if (item.style.display == 'none') {
-            item.style.display = 'inline-block';
-        }
-        else if (item.style.display == ' inline-block') {
-            item.style.display = 'none';
-        }
-        else {
-            item.style.display = 'none';
-        }
-    }
-    function toggleActive(task, window) {
-        item = document.getElementById(task);            
-        if (item.classList.contains('active-task')) {
-            item.classList.remove('active-task');
-        }
-        else {
-            item.classList.add('active-task');
-        }
-        showItem(window);
-    }
-    function openApplication(window, task) {
-        showItem(window);
-        showInlineItem(task);
-        toggleActive(task);
-    }
-    function closeApplication(window, task) {
-        showItem(window);
-        showInlineItem(task);
-    }
-</script>
+    <script>
+        window.onload = function () {
+            initDragElement();
+            initResizeElement();
+        };
 
-</body>
-</html>
+        function initDragElement() {
+            var pos1 = 0,
+                pos2 = 0,
+                pos3 = 0,
+                pos4 = 0;
+            var popups = document.getElementsByClassName("popup");
+            var elmnt = null;
+            var currentZIndex = 100; // TODO reset z index when a threshold is passed
+
+            for (var i = 0; i < popups.length; i++) {
+                var popup = popups[i];
+                var header = getHeader(popup);
+
+                popup.onmousedown = function () {
+                    this.style.zIndex = "" + ++ currentZIndex;
+                };
+
+                if (header) {
+                    header.parentPopup = popup;
+                    header.onmousedown = dragMouseDown;
+                }
+            }
+
+            function dragMouseDown(e) {
+                elmnt = this.parentPopup;
+                elmnt.style.zIndex = "" + ++ currentZIndex;
+
+                e = e || window.event;
+                // get the mouse cursor position at startup:
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                document.onmouseup = closeDragElement;
+                // call a function whenever the cursor moves:
+                document.onmousemove = elementDrag;
+            }
+
+            function elementDrag(e) {
+                if (! elmnt) {
+                    return;
+                }
+
+                e = e || window.event;
+                // calculate the new cursor position:
+                pos1 = pos3 - e.clientX;
+                pos2 = pos4 - e.clientY;
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                // set the element's new position:
+                elmnt.style.top = elmnt.offsetTop - pos2 + "px";
+                elmnt.style.left = elmnt.offsetLeft - pos1 + "px";
+            }
+
+            function closeDragElement() { /* stop moving when mouse button is released:*/
+                document.onmouseup = null;
+                document.onmousemove = null;
+            }
+
+            function getHeader(element) {
+                var headerItems = element.getElementsByClassName("popup-header");
+
+                if (headerItems.length === 1) {
+                    return headerItems[0];
+                }
+
+                return null;
+            }
+        }
+
+        function initResizeElement() {
+            var popups = document.getElementsByClassName("popup");
+            var element = null;
+            var startX,
+                startY,
+                startWidth,
+                startHeight;
+
+            for (var i = 0; i < popups.length; i++) {
+                var p = popups[i];
+
+                var right = document.createElement("div");
+                right.className = "resizer-right";
+                p.appendChild(right);
+                right.addEventListener("mousedown", initDrag, false);
+                right.parentPopup = p;
+
+                var bottom = document.createElement("div");
+                bottom.className = "resizer-bottom";
+                p.appendChild(bottom);
+                bottom.addEventListener("mousedown", initDrag, false);
+                bottom.parentPopup = p;
+
+                var both = document.createElement("div");
+                both.className = "resizer-both";
+                p.appendChild(both);
+                both.addEventListener("mousedown", initDrag, false);
+                both.parentPopup = p;
+            }
+
+            function initDrag(e) {
+                element = this.parentPopup;
+
+                startX = e.clientX;
+                startY = e.clientY;
+                startWidth = parseInt(document.defaultView.getComputedStyle(element).width, 10);
+                startHeight = parseInt(document.defaultView.getComputedStyle(element).height, 10);
+                document.documentElement.addEventListener("mousemove", doDrag, false);
+                document.documentElement.addEventListener("mouseup", stopDrag, false);
+            }
+
+            function doDrag(e) {
+                element.style.width = startWidth + e.clientX - startX + "px";
+                element.style.height = startHeight + e.clientY - startY + "px";
+            }
+
+            function stopDrag() {
+                document.documentElement.removeEventListener("mousemove", doDrag, false);
+                document.documentElement.removeEventListener("mouseup", stopDrag, false);
+            }
+        }
+    </script>
+    <script>
+
+        function fullscreen(id) {
+            var h = document.getElementById("desktop").offsetHeight;
+            var w = document.getElementById("desktop").offsetWidth;
+            item = document.getElementById(id);
+            if (item.classList.contains('application-fullscreen')) {
+                item.classList.remove('application-fullscreen');
+                if (id == 'minesweeper') {
+                    item.style.top = "73.4px";
+                    item.style.left = "512px";
+                    item.style.height = "440.4px";
+                    document.getElementById("minesweeper-content").style.height = "auto";
+                    document.getElementById("minesweeper-content").style.width = "auto";
+                } else if (id == 'explorer') {
+                    document.getElementById("explorer-content").style.height = "auto";
+                    document.getElementById("explorer-content").style.width = "auto";
+                }
+            } else {
+                item.classList.add('application-fullscreen');
+                if (id == 'minesweeper') {
+                    document.getElementById("minesweeper-content").style.height = h + "px";
+                    document.getElementById("minesweeper-content").style.width = w + "px";
+                } else if (id == 'explorer') {
+                    document.getElementById("explorer-content").style.height = h + "px";
+                    document.getElementById("explorer-content").style.width = w + "px";
+                }
+            }
+        }
+
+        function showItem(id) {
+            console.log("Trying to show item with ID:", id); // Debugging line
+            var item = document.getElementById(id);
+            if (item) {
+                if (item.style.display == 'none') {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            } else {
+                console.error("Element with ID " + id + " not found."); // Error log
+            }
+        }
+        function showInlineItem(id) {
+            item = document.getElementById(id);
+            if (item.style.display == 'none') {
+                item.style.display = 'inline-block';
+            } else if (item.style.display == ' inline-block') {
+                item.style.display = 'none';
+            } else {
+                item.style.display = 'none';
+            }
+        }
+        function toggleActive(task, window) {
+            item = document.getElementById(task);
+            if (item.classList.contains('active-task')) {
+                item.classList.remove('active-task');
+            } else {
+                item.classList.add('active-task');
+            } showItem(window);
+        }
+        function openApplication(window, task) {
+            showItem(window); // Ensure 'window' is a valid ID
+            showInlineItem(task); // Ensure 'task' is a valid ID
+            toggleActive(task);
+        }
+        function closeApplication(window, task) {
+            showItem(window);
+            showInlineItem(task);
+        }
+    </script>
+</body></body></html>
