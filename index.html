@@ -195,13 +195,30 @@
             </div>
         </div>
 
-        <!-- Minesweeper -->
+        <!-- days -->
         <div id="minesweeper-task" class="task active-task" onclick="toggleActive('minesweeper-task', 'minesweeper')">
             <img class="task-icon" src="./images/calendar-0.png"/>
             <div class="task-text">
                 Days since
             </div>
         </div>
+
+        <!-- message-->
+        <div id="message-task" class="task active-task" onclick="toggleActive('message-task', 'message')">
+            <img class="task-icon" src="./images/mail.ico"/>
+            <div class="task-text">
+                soppy message
+            </div>
+        </div>
+
+          <!-- Map-->
+          <div id="message-task" class="task active-task" onclick="toggleActive('minesweeper-task', 'minesweeper')">
+            <img class="task-icon" src="./images/mail.ico"/>
+            <div class="task-text">
+                soppy message
+            </div>
+        </div>
+
 
 
         <!-- Notifications & Clock -->
@@ -212,48 +229,48 @@
     </div>
 
     <div id="start-menu">
-        <div id="system-name">Windows 98</div>
+        <div id="system-name">Sarah's virtual Christmas Card</div>
         <div
             id="start-menu-button-container">
             <!-- Programs -->
             <div id="programs" class="start-menu-button">
                 <img src="./images/directory_program_group_small.ico" class="start-menu-button-icon"/>
-                <div class="start-menu-button-label">Programs</div>
+                <div class="start-menu-button-label">Hello</div>
             </div>
             <!-- Favorites -->
             <div class="start-menu-button">
                 <img src="./images/directory_favorites_small.ico" class="start-menu-button-icon"/>
-                <div class="start-menu-button-label">Favorites</div>
+                <div class="start-menu-button-label">Sarah</div>
             </div>
             <!-- Documents -->
             <div class="start-menu-button">
                 <img src="./images/directory_open_file_mydocs.ico" class="start-menu-button-icon" style="width:26px; margin-left:5px; margin-right:4px;"/>
-                <div class="start-menu-button-label" style="margin-top:8px;">Documents</div>
+                <div class="start-menu-button-label" style="margin-top:8px;">Happy </div>
             </div>
             <!-- Find -->
             <div class="start-menu-button">
                 <img src="./images/search_file_2.ico" class="start-menu-button-icon"/>
-                <div class="start-menu-button-label">Find</div>
+                <div class="start-menu-button-label">Christmas</div>
             </div>
             <!-- Run -->
             <div class="start-menu-button">
                 <img src="./images/application_hourglass_small.ico" class="start-menu-button-icon"/>
-                <div class="start-menu-button-label">Run</div>
+                <div class="start-menu-button-label">I</div>
             </div>
             <!-- Help -->
             <div class="start-menu-button">
                 <img src="./images/help_book_small.ico" class="start-menu-button-icon"/>
-                <div class="start-menu-button-label">Help</div>
+                <div class="start-menu-button-label">Love</div>
             </div>
             <!-- Log Off -->
             <div class="start-menu-button">
                 <img src="./images/key_win.ico" class="start-menu-button-icon"/>
-                <div class="start-menu-button-label">Log Off</div>
+                <div class="start-menu-button-label">You</div>
             </div>
             <!-- Shut Down -->
             <div class="start-menu-button">
                 <img src="./images/shut_down_cool.ico" class="start-menu-button-icon"/>
-                <div class="start-menu-button-label">Shut Down</div>
+                <div class="start-menu-button-label">So Much</div>
             </div>
         </div>
     </div>
@@ -466,7 +483,11 @@
         function showItem(id) {
     const item = document.getElementById(id);
     if (item) {
-        item.style.display = 'block'; // Always set to 'block' explicitly
+        if (item.style.display === 'none' || item.style.display === '') {
+            item.style.display = 'block'; // Show the start menu
+        } else {
+            item.style.display = 'none'; // Hide the start menu
+        }
     }
 }
 
