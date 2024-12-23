@@ -188,7 +188,7 @@
                         <div class="clear"></div>
                     </div>
 
-                     <iframe src="./days.html" id="days-frame" scrolling="no" style="flex: 1; border: none;"></iframe>
+                     <iframe src="./days.html" id="days-frame" scrolling="no" style="flex: 1;"></iframe>
                 </div>
             </div>
             <!-- map app -->
@@ -212,38 +212,41 @@
                     </div>
                    
                     
-                        <iframe src="./map.html" id="mine-frame" scrolling="no" style="flex: 1; border: none;"></iframe>
+                        <iframe src="./map.html" id="mine-frame" scrolling="no" style="flex: 1;"></iframe>
                 
                 </div>
             </div>
 
-            <!-- message app -->
-            <div id="message" class="window active-window application-window popup" style="display : none">
-                <div class="window-border">
+              <!-- map app -->
+              <div id="message" class="window active-window application-window popup" style="display : none">
+                <div class="window-border" style="display: flex; flex-direction: column; height: 100%;">
                     <div class="title-bar h-count ui-draggable-handle popup-header" id="parent">
                         <img class="icon" src="./images/mail.ico"/>
                         <div class="control-box">
-                            <a class="button-3d minimize" onclick="toggleActive('message-task', 'message')">
+                            <a class="button-3d minimize" onclick="toggleActive('map-task', 'map')">
                                 <span>&nbsp;</span>
                             </a>
-                            <a class="button-3d maximize" onclick="fullscreen('message')">
+                            <a class="button-3d maximize" onclick="fullscreen('map')">
                                 <span>&nbsp;</span>
                             </a>
-                            <a class="button-3d close" onclick="closeApplication('message', 'message-task')">
+                            <a class="button-3d close" onclick="closeApplication('map', 'map-task')">
                                 <span>&nbsp;</span>
                             </a>
                         </div>
-                        <span class="title">Soppy Message</span>
+                        <span class="title">Soppy Message </span>
+                        <div class="clear"></div>
                     </div>
-                    <div class="clear"></div>
-                    <div id="message-content">
-                        <iframe src="./marquee.html" id="message-frame" scrolling="no"></iframe>
-                    </div>
+                   
+                    
+                        <iframe src="./marquee.html" id="mine-frame" scrolling="no" style="flex: 1;"></iframe>
+                
                 </div>
             </div>
 
-            <div
-                id="taskbar">
+           
+      
+
+            <div id="taskbar">
                 <!-- Start Button -->
                 <div id="start-button" onclick="showItem('start-menu')">
                     <img src="./images/windows.ico" id="windows-icon"/>
@@ -256,7 +259,7 @@
                     id="task-container">
 
                     <!-- music-->
-                    <div id="music-task" class="task active-task" style="display : inline-block">
+                    <div id="music-task" class="task active-task" style="display : block; border-left: 5px;">
                         <img class="task-icon" src="./images/win.png"/>
                         <div class="task-text">
                             Win amp

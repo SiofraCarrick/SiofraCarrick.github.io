@@ -6,7 +6,7 @@ body {
 }
 
 .content{
-  height: inherit;
+  height:100%
 }
 
 iframe {
@@ -25,7 +25,6 @@ iframe {
   position: absolute;
   resize: both; 
   overflow: auto;
- 
 }
 
 .popup-header {
@@ -53,7 +52,6 @@ iframe {
   right: 0;
   bottom: 0;
   cursor: n-resize;
-  touch-action: none; /* Prevent default touch actions */
 }
 
 .popup .resizer-both {
@@ -65,7 +63,6 @@ iframe {
   right: 0;
   bottom: 0;
   cursor: nw-resize;
-  touch-action: none; /* Prevent default touch actions */
 }
 
 /*NOSELECT*/
@@ -238,7 +235,7 @@ iframe {
 #task-container {
   position: absolute;
   bottom: 0;
-  left: 69px;
+  left: 80px;
   margin-right: 95px;
   display: inline-block;
   height: 100%;
