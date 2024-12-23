@@ -166,12 +166,11 @@
                     Projects
                 </div>
             </div>
-            
 
 
             <!-- days Application Window -->
-            <div id="days" class="window active-window application-window popup window-border" style="display : none">
-                <!--  ui-widget-content ui-draggableui-widget-content ui-draggable  -->
+            <div id="days" class="window active-window application-window popup" style="display: none;">
+                <div class="window-border" style="display: flex; flex-direction: column; height: 100%;">
                     <div class="title-bar h-count ui-draggable-handle popup-header" id="parent">
                         <img class="icon" src="./images/calendar-0.png"/>
                         <div class="control-box">
@@ -186,20 +185,15 @@
                             </a>
                         </div>
                         <span class="title">Days Since we met</span>
-
-                        <div id="content">
-                        
-                            <iframe src="./days.html" id="days-frame" scrolling="no"></iframe>
-                        
-                        </div>
+                        <div class="clear"></div>
                     </div>
-                  
-                    
-    
+
+                     <iframe src="./days.html" id="days-frame" scrolling="no" style="flex: 1; border: none;"></iframe>
+                </div>
             </div>
             <!-- map app -->
-            <div id="map" class="window active-window application-window popup window-border" style="display : none">
-               
+            <div id="map" class="window active-window application-window popup" style="display : none">
+                <div class="window-border" style="display: flex; flex-direction: column; height: 100%;">
                     <div class="title-bar h-count ui-draggable-handle popup-header" id="parent">
                         <img class="icon" src="./images/world-4.png"/>
                         <div class="control-box">
@@ -214,17 +208,18 @@
                             </a>
                         </div>
                         <span class="title">Where we met</span>
+                        <div class="clear"></div>
                     </div>
-                    <div class="clear"></div>
-                    <div id="map-content">
-                        <iframe src="./map.html" id="mine-frame" scrolling="no"></iframe>
-                    </div>
+                   
+                    
+                        <iframe src="./map.html" id="mine-frame" scrolling="no" style="flex: 1; border: none;"></iframe>
                 
+                </div>
             </div>
 
             <!-- message app -->
-            <div id="message" class="window active-window application-window popup window-border" style="display : none">
-                
+            <div id="message" class="window active-window application-window popup" style="display : none">
+                <div class="window-border">
                     <div class="title-bar h-count ui-draggable-handle popup-header" id="parent">
                         <img class="icon" src="./images/mail.ico"/>
                         <div class="control-box">
@@ -244,7 +239,7 @@
                     <div id="message-content">
                         <iframe src="./marquee.html" id="message-frame" scrolling="no"></iframe>
                     </div>
-                
+                </div>
             </div>
 
             <div
@@ -382,11 +377,12 @@
                             elmnt.style.zIndex = "" + ++ currentZIndex;
 
                             e = e || window.event;
-                            e.preventDefault();
-                            pos3 = e.clientX || e.touches[0].clientX;
-                            pos4 = e.clientY || e.touches[0].clientY;
-                            document.onmouseup = document.ontouchend = closeDragElement;
-                            document.onmousemove = document.ontouchmove = elementDrag;
+                            // get the mouse cursor position at startup:
+                            pos3 = e.clientX;
+                            pos4 = e.clientY;
+                            document.onmouseup = closeDragElement;
+                            // call a function whenever the cursor moves:
+                            document.onmousemove = elementDrag;
                         }
 
                         function elementDrag(e) {
@@ -395,20 +391,19 @@
                             }
 
                             e = e || window.event;
-                            e.preventDefault();
-                            var clientX = e.clientX || e.touches[0].clientX;
-                            var clientY = e.clientY || e.touches[0].clientY;
-                            pos1 = pos3 - clientX;
-                            pos2 = pos4 - clientY;
-                            pos3 = clientX;
-                            pos4 = clientY;
+                            // calculate the new cursor position:
+                            pos1 = pos3 - e.clientX;
+                            pos2 = pos4 - e.clientY;
+                            pos3 = e.clientX;
+                            pos4 = e.clientY;
+                            // set the element's new position:
                             elmnt.style.top = elmnt.offsetTop - pos2 + "px";
                             elmnt.style.left = elmnt.offsetLeft - pos1 + "px";
                         }
 
                         function closeDragElement() { /* stop moving when mouse button is released:*/
-                            document.onmouseup = document.ontouchend = null;
-                            document.onmousemove = document.ontouchmove = null;
+                            document.onmouseup = null;
+                            document.onmousemove = null;
                         }
 
                         function getHeader(element) {
@@ -437,53 +432,40 @@
                             right.className = "resizer-right";
                             p.appendChild(right);
                             right.addEventListener("mousedown", initDrag, false);
-                            right.addEventListener("touchstart", initDrag, false);
                             right.parentPopup = p;
 
                             var bottom = document.createElement("div");
                             bottom.className = "resizer-bottom";
                             p.appendChild(bottom);
                             bottom.addEventListener("mousedown", initDrag, false);
-                            bottom.addEventListener("touchstart", initDrag, false);
                             bottom.parentPopup = p;
 
                             var both = document.createElement("div");
                             both.className = "resizer-both";
                             p.appendChild(both);
                             both.addEventListener("mousedown", initDrag, false);
-                            both.addEventListener("touchstart", initDrag, false);
                             both.parentPopup = p;
                         }
 
                         function initDrag(e) {
                             element = this.parentPopup;
 
-                            e = e || window.event;
-                            e.preventDefault();
-                            startX = e.clientX || e.touches[0].clientX;
-                            startY = e.clientY || e.touches[0].clientY;
+                            startX = e.clientX;
+                            startY = e.clientY;
                             startWidth = parseInt(document.defaultView.getComputedStyle(element).width, 10);
                             startHeight = parseInt(document.defaultView.getComputedStyle(element).height, 10);
                             document.documentElement.addEventListener("mousemove", doDrag, false);
                             document.documentElement.addEventListener("mouseup", stopDrag, false);
-                            document.documentElement.addEventListener("touchmove", doDrag, false);
-                            document.documentElement.addEventListener("touchend", stopDrag, false);
                         }
 
                         function doDrag(e) {
-                            e = e || window.event;
-                            e.preventDefault();
-                            var clientX = e.clientX || e.touches[0].clientX;
-                            var clientY = e.clientY || e.touches[0].clientY;
-                            element.style.width = startWidth + clientX - startX + "px";
-                            element.style.height = startHeight + clientY - startY + "px";
+                            element.style.width = startWidth + e.clientX - startX + "px";
+                            element.style.height = startHeight + e.clientY - startY + "px";
                         }
 
                         function stopDrag() {
                             document.documentElement.removeEventListener("mousemove", doDrag, false);
                             document.documentElement.removeEventListener("mouseup", stopDrag, false);
-                            document.documentElement.removeEventListener("touchmove", doDrag, false);
-                            document.documentElement.removeEventListener("touchend", stopDrag, false);
                         }
                     }
                 </script>
