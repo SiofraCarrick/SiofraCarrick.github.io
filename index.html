@@ -223,13 +223,13 @@
                     <div class="title-bar h-count ui-draggable-handle popup-header" id="parent">
                         <img class="icon" src="./images/mail.ico"/>
                         <div class="control-box">
-                            <a class="button-3d minimize" onclick="toggleActive('map-task', 'map')">
+                            <a class="button-3d minimize" onclick="toggleActive('message', 'message')">
                                 <span>&nbsp;</span>
                             </a>
-                            <a class="button-3d maximize" onclick="fullscreen('map')">
+                            <a class="button-3d maximize" onclick="fullscreen('message')">
                                 <span>&nbsp;</span>
                             </a>
-                            <a class="button-3d close" onclick="closeApplication('map', 'map-task')">
+                            <a class="button-3d close" onclick="closeApplication('message', 'message-task')">
                                 <span>&nbsp;</span>
                             </a>
                         </div>
@@ -259,7 +259,7 @@
                     id="task-container">
 
                     <!-- music-->
-                    <div id="music-task" class="task active-task" style="display : block; border-left: 5px;">
+                    <div id="music-task" class="task active-task" style="display : inline-block; border-left: 5px;">
                         <img class="task-icon" src="./images/win.png"/>
                         <div class="task-text">
                             Win amp
@@ -508,11 +508,23 @@
                             item.classList.add('active-task');
                         } showItem(window);
                     }
+                    let windowOpenCount = 0;
+
                     function openApplication(window, task) {
+                        var i = 0;
                         showItem(window); // Ensure 'window' is a valid ID
                         showInlineItem(task); // Ensure 'task' is a valid ID
-                        toggleActive(task);
-                    }
+                        // Move the window more to the right each time the function is called
+                        const windowElement = document.getElementById(window);
+                        if (windowElement) {
+                            const currentLeft = parseInt(windowElement.style.left, 10) || 0;
+                            windowElement.style.left = (currentLeft + (windowOpenCount * 20)) + 'px';
+                            windowOpenCount++;
+                        }
+                            windowElement.style.left = (currentLeft + 20) + 'px';
+                        }
+                    
+                    
 
                     function closeApplication(windowId, taskId) {
                         const windowElement = document.getElementById(windowId);
