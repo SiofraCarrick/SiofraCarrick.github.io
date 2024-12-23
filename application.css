@@ -9,6 +9,11 @@
     border-bottom-color: #848484;
     background: #c0c0c0;
     padding: 2px;
+    overflow: hidden; /* Hide scrollbars */
+    min-width: 250px;
+    min-height: 300px;
+    
+    
 }
 .title-bar {
     padding: 0;
