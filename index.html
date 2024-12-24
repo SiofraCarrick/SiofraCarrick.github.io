@@ -7,7 +7,7 @@
         <meta charset="utf-8"/>
         <link rel="icon" type="image/x-icon" href="./images/fav.ico">
         
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=0.5">
         <link rel="stylesheet" href="./style.css">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <link rel="stylesheet" href="./application.css">
@@ -30,7 +30,7 @@
             const webamp = new Webamp({
                 initialTracks: [
                     { // Ensure the file is served properly with CORS settings if needed
-                        url: "./music/Song.mp3"
+                        url: "./music/you-must-be-the-place.mp3"
                     },
                 ],
                 __butterchurnOptions: {
@@ -152,6 +152,14 @@
                     Soppy Message
                 </div>
             </div>
+
+             <!-- love zone-->
+             <div id="love-desktop-app" class="application" onclick="openApplication('love', 'love-task')">
+                <img src="./images/bear1.png" class="application-icon"/>
+                <div class="application-title">
+                    love zone
+                </div>
+            </div>
             <!-- About Me -->
             <div class="application">
                 <img src="./images/notepad.ico" class="application-icon"/>
@@ -188,7 +196,7 @@
                         <div class="clear"></div>
                     </div>
 
-                     <iframe src="./days.html" id="days-frame" scrolling="no" style="flex: 1;"></iframe>
+                     <iframe src="./days.html" id="days-frame" style="flex: 1;"></iframe>
                 </div>
             </div>
             <!-- map app -->
@@ -212,7 +220,7 @@
                     </div>
                    
                     
-                        <iframe src="./map.html" id="mine-frame" scrolling="no" style="flex: 1;"></iframe>
+                        <iframe src="./map.html" scrolling="no" style="flex: 1;"></iframe>
                 
                 </div>
             </div>
@@ -236,14 +244,34 @@
                         <span class="title">Soppy Message </span>
                         <div class="clear"></div>
                     </div>
-                   
-                    
-                        <iframe src="./marquee.html" id="mine-frame" scrolling="no" style="flex: 1;"></iframe>
+                        <iframe src="./marquee.html"  style="flex: 1;"></iframe>
                 
                 </div>
             </div>
 
-           
+                <!-- love app -->
+              <div id="love" class="window active-window application-window popup" style="display : none">
+                <div class="window-border" style="display: flex; flex-direction: column; height: 100%;">
+                    <div class="title-bar h-count ui-draggable-handle popup-header" id="parent">
+                        <img class="icon" src="./images/mail.ico"/>
+                        <div class="control-box">
+                            <a class="button-3d minimize" onclick="toggleActive('love', 'love')">
+                                <span>&nbsp;</span>
+                            </a>
+                            <a class="button-3d maximize" onclick="fullscreen('love')">
+                                <span>&nbsp;</span>
+                            </a>
+                            <a class="button-3d close" onclick="closeApplication('love', 'love-task')">
+                                <span>&nbsp;</span>
+                            </a>
+                        </div>
+                        <span class="title">Love Zone </span>
+                        <div class="clear"></div>
+                    </div>
+                        <iframe src="./lovezone.html"  style="flex: 1;"></iframe>
+                
+                </div>
+            </div>
       
 
             <div id="taskbar">
@@ -278,45 +306,52 @@
                     <div id="message-task" class="task active-task" onclick="toggleActive('message-task', 'message')">
                         <img class="task-icon" src="./images/mail.ico"/>
                         <div class="task-text">
-                            soppy Message
-                        </div>
-                    </div>
-
-                    <!-- Map-->
-                    <div id="map-task" class="task active-task" onclick="toggleActive('map-task', 'map')">
-                        <img class="task-icon" src="./images/world-4.png"/>
-                        <div class="task-text">
-                            Where We Met
-                        </div>
-                    </div>
-
-
-                    <!-- Notifications & Clock -->
-                    <div id="notification-tray">
-                        <img src="./images/volume.ico" id="volume-icon"/>
-                        <div id="clock"></div>
+                        Days since
                     </div>
                 </div>
 
-                <div id="start-menu">
-                    <div id="system-name">Sarah's virtual Christmas Card</div>
-                    <div
-                        id="start-menu-button-container">
-                        <!-- Programs -->
-                        <div id="programs" class="start-menu-button">
-                            <img src="./images/directory_program_group_small.ico" class="start-menu-button-icon"/>
-                            <div class="start-menu-button-label">Hello</div>
-                        </div>
-                        <!-- Favorites -->
-                        <div class="start-menu-button">
-                            <img src="./images/directory_favorites_small.ico" class="start-menu-button-icon"/>
-                            <div class="start-menu-button-label">Sarah</div>
-                        </div>
-                        <!-- Documents -->
-                        <div class="start-menu-button">
-                            <img src="./images/directory_open_file_mydocs.ico" class="start-menu-button-icon" style="width:26px; margin-left:5px; margin-right:4px;"/>
-                            <div class="start-menu-button-label" style="margin-top:8px;">Happy
-                            </div>
+                <!-- message-->
+                <div id="message-task" class="task active-task" onclick="toggleActive('message-task', 'message')">
+                    <img class="task-icon" src="./images/mail.ico"/>
+                    <div class="task-text">
+                        soppy Message
+                    </div>
+                </div>
+
+                <!-- Map-->
+                <div id="map-task" class="task active-task" onclick="toggleActive('map-task', 'map')">
+                    <img class="task-icon" src="./images/world-4.png"/>
+                    <div class="task-text">
+                        Where We Met
+                    </div>
+                </div>
+                <!-- lovee-->
+                <div id="love-task" class="task active-task" onclick="toggleActive('love-task', 'love')">
+                    <img class="task-icon" src="./images/bear1.png"/>
+                    <div class="task-text">
+                        Love Zone
+                    </div>
+                </div>
+
+
+                <!-- Notifications & Clock -->
+                <div id="notification-tray">
+                    <img src="./images/volume.ico" id="volume-icon"/>
+                    <div id="clock"></div>
+                </div>
+            </div>
+
+            <div id="start-menu">
+                <div id="system-name">Sarah's virtual Christmas Card</div>
+                <div
+                    id="start-menu-button-container">
+                    <!-- Programs -->
+                    <div id="programs" class="start-menu-button">
+                        <img src="./images/directory_program_group_small.ico" class="start-menu-button-icon"/>
+                        <div class="start-menu-button-label">Hello</div>
+                    </div>
+                    <!-- Favorites -->
+                    <div class="start-menu-button">
                         </div>
                         <!-- Find -->
                         <div class="start-menu-button">
@@ -349,7 +384,6 @@
                 <script>
                     window.onload = function () {
                         initDragElement();
-                        initResizeElement();
                     };
 
                     function initDragElement() {
@@ -420,66 +454,25 @@
                         }
                     }
 
-                    function initResizeElement() {
-                        var popups = document.getElementsByClassName("popup");
-                        var element = null;
-                        var startX,
-                            startY,
-                            startWidth,
-                            startHeight;
-
-                        for (var i = 0; i < popups.length; i++) {
-                            var p = popups[i];
-
-                            var right = document.createElement("div");
-                            right.className = "resizer-right";
-                            p.appendChild(right);
-                            right.addEventListener("mousedown", initDrag, false);
-                            right.parentPopup = p;
-
-                            var bottom = document.createElement("div");
-                            bottom.className = "resizer-bottom";
-                            p.appendChild(bottom);
-                            bottom.addEventListener("mousedown", initDrag, false);
-                            bottom.parentPopup = p;
-
-                            var both = document.createElement("div");
-                            both.className = "resizer-both";
-                            p.appendChild(both);
-                            both.addEventListener("mousedown", initDrag, false);
-                            both.parentPopup = p;
-                        }
-
-                        function initDrag(e) {
-                            element = this.parentPopup;
-
-                            startX = e.clientX;
-                            startY = e.clientY;
-                            startWidth = parseInt(document.defaultView.getComputedStyle(element).width, 10);
-                            startHeight = parseInt(document.defaultView.getComputedStyle(element).height, 10);
-                            document.documentElement.addEventListener("mousemove", doDrag, false);
-                            document.documentElement.addEventListener("mouseup", stopDrag, false);
-                        }
-
-                        function doDrag(e) {
-                            element.style.width = startWidth + e.clientX - startX + "px";
-                            element.style.height = startHeight + e.clientY - startY + "px";
-                        }
-
-                        function stopDrag() {
-                            document.documentElement.removeEventListener("mousemove", doDrag, false);
-                            document.documentElement.removeEventListener("mouseup", stopDrag, false);
-                        }
-                    }
+        
                 </script>
                 <script>
 
                     function fullscreen(id) {
                         const item = document.getElementById(id);
                         if (item.classList.contains('application-fullscreen')) {
+                            item.style.width = '25%';
+                            item.style.height = '25%';
+                            item.style.top = '0';
+                            item.style.left = '0';
+
                             item.classList.remove('application-fullscreen');
                         } else {
                             item.classList.add('application-fullscreen');
+                            item.style.width = '100%';
+                            item.style.height = '100%';
+                            item.style.top = '0';
+                            item.style.left = '0';
                         }
                     }
 
