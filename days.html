@@ -13,14 +13,17 @@
             padding: 0;
             font-weight: bold;
             display: flex;
-            flex-direction: column; /* Change from row to column */
-            background-image:url('./images/love/starback2.gif');
+            flex-direction: column;
+            align-items: center;
+            background-image: url('./images/love/starback2.gif');
             color: white;
         }
         .container {
             width: 100%;
             padding: 20px;
-            display: block;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             box-sizing: border-box;
         }
         #days {
@@ -40,18 +43,17 @@
     </style>
 </head>
 <body>
-
     <div class="container">
         <div style="display: flex; align-items: center; justify-content: center;">
             <img src="./images/time/monkey_time.gif" style="margin-right: 10px; background-color: transparent;">
             <h1>It has been ... </h1>
-            <img src="./images/time/monkey_time.gif" style="margin-left: 10px; background-color: transparent;">
+            <img src="./images/time/monkey_time.gif" style="margin-top: 10px; background-color: transparent;">
         </div>
         <h1 id="days"></h1>
         <h1> Since we met </h1>
-        <img src="./images/time/timefly.gif" >
-        <p> how the time flies with you <3 </p>
-        <img src="./images/time/cn_moretime.gif" >
+        <img src="./images/time/timefly.gif">
+        <p>how the time flies with you <3</p>
+        <img src="./images/time/cn_moretime.gif">
     </div>
     <div id="random-pics">
         <img src="./images/time/animatedclock.gif">
