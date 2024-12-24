@@ -116,3 +116,22 @@
     /* W3C */
     /* IE6-9 */
 }
+
+/* Custom styles for resize handles */
+@media (max-width: 768px) {
+    .application-window {
+        resize: both;
+        overflow: auto;
+    }
+
+    .application-window::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 20px; /* Increase the size for mobile */
+        height: 20px; /* Increase the size for mobile */
+        background: transparent;
+        cursor: se-resize;
+    }
+}

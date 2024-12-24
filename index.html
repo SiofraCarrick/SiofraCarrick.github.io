@@ -7,7 +7,7 @@
         <meta charset="utf-8"/>
         <link rel="icon" type="image/x-icon" href="./images/fav.ico">
         
-        <meta name="viewport" content="width=device-width, initial-scale=0.5">
+        <meta name="viewport" content="width=device-width, initial-scale=0.9">
         <link rel="stylesheet" href="./style.css">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <link rel="stylesheet" href="./application.css">
@@ -411,9 +411,14 @@
                                 this.style.zIndex = "" + ++ currentZIndex;
                             };
 
+                            popup.ontouchstart = function () {
+                                this.style.zIndex = "" + ++ currentZIndex;
+                            };
+
                             if (header) {
                                 header.parentPopup = popup;
                                 header.onmousedown = dragMouseDown;
+                                header.ontouchstart = dragTouchStart;
                             }
                         }
 
@@ -430,6 +435,19 @@
                             document.onmousemove = elementDrag;
                         }
 
+                        function dragTouchStart(e) {
+                            elmnt = this.parentPopup;
+                            elmnt.style.zIndex = "" + ++ currentZIndex;
+
+                            e = e || window.event;
+                            // get the touch position at startup:
+                            pos3 = e.touches[0].clientX;
+                            pos4 = e.touches[0].clientY;
+                            document.ontouchend = closeDragElement;
+                            // call a function whenever the touch moves:
+                            document.ontouchmove = elementDrag;
+                        }
+
                         function elementDrag(e) {
                             if (! elmnt) {
                                 return;
@@ -437,10 +455,17 @@
 
                             e = e || window.event;
                             // calculate the new cursor position:
-                            pos1 = pos3 - e.clientX;
-                            pos2 = pos4 - e.clientY;
-                            pos3 = e.clientX;
-                            pos4 = e.clientY;
+                            if (e.type === 'mousemove') {
+                                pos1 = pos3 - e.clientX;
+                                pos2 = pos4 - e.clientY;
+                                pos3 = e.clientX;
+                                pos4 = e.clientY;
+                            } else if (e.type === 'touchmove') {
+                                pos1 = pos3 - e.touches[0].clientX;
+                                pos2 = pos4 - e.touches[0].clientY;
+                                pos3 = e.touches[0].clientX;
+                                pos4 = e.touches[0].clientY;
+                            }
                             // set the element's new position:
                             elmnt.style.top = elmnt.offsetTop - pos2 + "px";
                             elmnt.style.left = elmnt.offsetLeft - pos1 + "px";
@@ -449,6 +474,8 @@
                         function closeDragElement() { /* stop moving when mouse button is released:*/
                             document.onmouseup = null;
                             document.onmousemove = null;
+                            document.ontouchend = null;
+                            document.ontouchmove = null;
                         }
 
                         function getHeader(element) {
