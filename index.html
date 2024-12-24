@@ -29,9 +29,9 @@
 
             const webamp = new Webamp({
                 initialTracks: [
-                    { // Ensure the file is served properly with CORS settings if needed
-                        url: "./music/you-must-be-the-place.mp3"
-                    },
+                    {url: "./music/you-must-be-the-place.mp3"},
+                    {url: "./music/you-as-you-are-small.mp3"},
+                    {},
                 ],
                 __butterchurnOptions: {
                     importButterchurn: () => Promise.resolve(window.butterchurn),
