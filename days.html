@@ -65,17 +65,21 @@
     </div>
     <script>
         function updateTime() {
-            const startDate = new Date('2024-01-12');
+            const startDate = new Date('2024-01-12T17:00:00');
             const now = new Date();
             const timeDifference = now - startDate;
 
             const years = Math.floor(timeDifference / (1000 * 60 * 60 * 24 * 365));
             const days = Math.floor((timeDifference % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24));
             const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeDifference % (1000 * 60)) / (1000 * 60));
+            const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
 
-            document.getElementById('days').textContent = `${years} years, ${days} days, ${hours} hours, ${minutes} minutes`;
+            document.getElementById('days').textContent = `${years} years, ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
         }
+
+        setInterval(updateTime, 1000);
+        updateTime();
 
         setInterval(updateTime, 1000);
         updateTime();
