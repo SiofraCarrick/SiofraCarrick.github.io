@@ -1,0 +1,32 @@
+name: Generate Books JSON
+
+# When to run
+on:
+  push:
+    paths:
+      - 'webAmp/books/**'   # run whenever files in books change
+  workflow_dispatch:       # allows manual trigger from GitHub UI
+
+jobs:
+  generate-json:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Generate books.json
+        run: node webAmp/scripts/generateJson.js
+
+      - name: Commit and push books.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add webAmp/books.json
+          git diff --quiet || git commit -m "Auto-update books.json"
+          git push

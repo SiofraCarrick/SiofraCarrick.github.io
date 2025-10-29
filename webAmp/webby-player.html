@@ -75,9 +75,9 @@
     });
 
     setInterval(() => {
-      const track = webamp.getMediaManager().getCurrentTrack();
+      const track = webamp.getCurrentTrack(); // new API
+      const time = webamp.audioManager?.getCurrentTime() || 0; // new API
       if (!track) return;
-      const time = webamp.getMediaManager().getCurrentTime();
       localStorage.setItem("lastTrack", JSON.stringify(track));
       localStorage.setItem("lastTime", time);
     }, 5000);
