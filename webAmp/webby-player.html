@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Webamp Player</title>
+  <!-- Use UMD build so Webamp is globally available -->
+  <script src="https://unpkg.com/webamp/bundle/webamp.bundle.min.js"></script>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: #000;
+      color: white;
+      overflow: hidden;
+    }
+    #app {
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  //brrrr
+  <script src="https://unpkg.com/webamp@1.5.0/built/webamp.bundle.min.js"></script>
+    <script src="https://unpkg.com/butterchurn@2.6.7/lib/butterchurn.min.js"></script>
+    <script src="https://unpkg.com/butterchurn-presets@2.4.7/lib/butterchurnPresets.min.js"></script>
+  <script>
+    // 1️⃣ Define your playlist
+    const playlist = [
+      {
+        metaData: { artist: "Daft Punk", title: "Harder Better Faster Stronger" },
+        url: "https://example.com/music/daftpunk.mp3", // <-- replace with your file URLs
+      },
+      {
+        metaData: { artist: "Aphex Twin", title: "Xtal" },
+        url: "https://example.com/music/xtal.mp3",
+      },
+    ];
+
+    // 2️⃣ Skin
+    const skinUrl = "https://cdn.jsdelivr.net/gh/captbaritone/webamp@master/skins/base-2.91.wsz";
+
+    // 3️⃣ Create the player
+    const webamp = new Webamp({
+      initialTracks: playlist,
+      initialSkin: { url: skinUrl },
+      __butterchurnOptions: {
+        importButterchurn: () => Promise.resolve(window.butterchurn),
+        getPresets: () => {
+          const presets = window.butterchurnPresets.getPresets();
+          return Object.keys(presets).map(name => ({
+            name,
+            butterchurnPresetObject: presets[name],
+          }));
+        },
+        butterchurnOpen: true
+      },
+      windowLayout: {
+        main: { position: { top: 0, left: 0 } },
+        equalizer: { position: { top: 116, left: 0 } },
+        milkdrop: { position: { top: 0, left: 275 }, size: { extraHeight: 12, extraWidth: 7 } }
+      }
+    });
+
+    // 4️⃣ Render
+    webamp.renderWhenReady(document.getElementById("app"));
+
+    // 5️⃣ Local playback resume
+    webamp.onTrackDidChange(({ track }) => {
+      localStorage.setItem("lastTrack", JSON.stringify(track));
+      localStorage.setItem("lastTime", 0);
+    });
+
+    setInterval(() => {
+      const track = webamp.getMediaManager().getCurrentTrack();
+      if (!track) return;
+      const time = webamp.getMediaManager().getCurrentTime();
+      localStorage.setItem("lastTrack", JSON.stringify(track));
+      localStorage.setItem("lastTime", time);
+    }, 5000);
+
+    window.addEventListener("load", () => {
+      const lastTrack = JSON.parse(localStorage.getItem("lastTrack") || "null");
+      const lastTime = parseFloat(localStorage.getItem("lastTime") || "0");
+      if (lastTrack && lastTime) {
+        const matching = playlist.find(t => t.metaData.title === lastTrack.metaData.title);
+        if (matching) {
+          setTimeout(() => {
+            webamp.playTrack(matching);
+            webamp.seekTo(lastTime);
+          }, 2000);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
