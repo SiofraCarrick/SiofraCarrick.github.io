@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <link rel="icon" type="image/x-icon" href="../images/fav.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Webamp Player</title>
-  <!-- Use UMD build so Webamp is globally available -->
-  <script src="https://unpkg.com/webamp/bundle/webamp.bundle.min.js"></script>
+  <title>Totattly not allegal</title>
+
   <style>
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
-      background-color: #000;
+      background-color: #fe00f2;
       color: white;
       overflow: hidden;
     }
@@ -41,12 +41,12 @@
     ];
 
     // 2️⃣ Skin
-    const skinUrl = "https://cdn.jsdelivr.net/gh/captbaritone/webamp@master/skins/base-2.91.wsz";
+    //const skinUrl = "https://cdn.jsdelivr.net/gh/captbaritone/webamp@master/skins/base-2.91.wsz";
 
     // 3️⃣ Create the player
     const webamp = new Webamp({
       initialTracks: playlist,
-      initialSkin: { url: skinUrl },
+     // initialSkin: { url: skinUrl },
       __butterchurnOptions: {
         importButterchurn: () => Promise.resolve(window.butterchurn),
         getPresets: () => {
