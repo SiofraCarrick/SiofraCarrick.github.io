@@ -23,7 +23,7 @@ jobs:
           node-version: '20'
 
       - name: Generate books.json
-        run: node webAmp/scripts/generateBooksJson.js
+        run: node webAmp/scripts/generateJson.js
 
       - name: Commit and push books.json
         env:
