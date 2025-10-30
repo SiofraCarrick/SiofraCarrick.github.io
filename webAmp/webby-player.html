@@ -1,128 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Totattly not allegal</title>
 
-    <style>
-        html,
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            background-color: #fe00f2;
-            color: white;
-            overflow: hidden;
-            background: #000;
-            color: white;
-        }
-
-        #app {
-            height: 100%;
-            width: 100%;
-        }
-    </style>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: #fe00f2;
+      color: white;
+      overflow: hidden;
+    }
+    #app {
+      height: 100%;
+      width: 100%;
+    }
+  </style>
 </head>
-
 <body>
-    <div id="app"></div>
+  <div id="app"></div>
     //brrrr
-    <script src="https://unpkg.com/webamp@2.2.0/built/webamp.bundle.min.js"></script>
-    <script src="https://unpkg.com/butterchurn@2.6.7/lib/butterchurn.min.js"></script>
-    <script src="https://unpkg.com/butterchurn-presets@2.4.7/lib/butterchurnPresets.min.js"></script>
+  <script src="https://unpkg.com/webamp@2.2.0/built/webamp.bundle.min.js"></script>
+  <script src="https://unpkg.com/butterchurn@2.6.7/lib/butterchurn.min.js"></script>
+  <script src="https://unpkg.com/butterchurn-presets@2.4.7/lib/butterchurnPresets.min.js"></script>
 
-    <script>
+  <script>
         // Skin
         //const skinUrl = "https://cdn.jsdelivr.net/gh/captbaritone/webamp@master/skins/base-2.91.wsz";
 
         // Fetch books.json and return a flattened playlist
-        async function loadPlaylist() {
-            try {
-                const res = await fetch("./books.json");
-                const books = await res.json();
-                const playlist = [];
+    async function loadPlaylist() {
+      try {
+        const res = await fetch("./books.json");
+        const books = await res.json();
+        const playlist = [];
 
-                for (const book of books) {
-                    for (const chapterUrl of book.chapters) {
-                        const parts = chapterUrl.split("/");
-                        const rawTitle = parts[parts.length - 1];
-                        playlist.push({
-                            metaData: {
-                                artist: book.title,
-                                title: decodeURIComponent(rawTitle)
-                            },
-                            url: encodeURI(chapterUrl)
-                        });
-                    }
-                }
-
-                return playlist;
-            } catch (err) {
-                console.error("Failed to load books.json:", err);
-                return [];
-            }
+        for (const book of books) {
+          for (const chapterUrl of book.chapters) {
+            const parts = chapterUrl.split("/");
+            const rawTitle = parts[parts.length - 1];
+            playlist.push({
+              metaData: {
+                artist: book.title,
+                title: decodeURIComponent(rawTitle)
+              },
+              url: encodeURI(chapterUrl)
+            });
+          }
         }
 
-        async function initWebamp() {
-            const playlist = await loadPlaylist();
+        return playlist;
+      } catch (err) {
+        console.error("Failed to load books.json:", err);
+        return [];
+      }
+    }
 
-            const webamp = new Webamp({
-                initialTracks: playlist,
+    async function initWebamp() {
+      const playlist = await loadPlaylist();
+
+      const webamp = new Webamp({
+        initialTracks: playlist,
                 // initialSkin: { url: skinUrl },
-                __butterchurnOptions: {
-                    importButterchurn: () => Promise.resolve(window.butterchurn),
-                    getPresets: () => {
-                        const presets = window.butterchurnPresets.getPresets();
-                        return Object.keys(presets).map(name => ({
-                            name,
-                            butterchurnPresetObject: presets[name]
-                        }));
-                    },
-                    butterchurnOpen: true
-                },
-                windowLayout: {
-                    main: { position: { top: 50, left: 50 } }, // main window
-                    equalizer: { position: { top: 116, left: 0 } },
-                    milkdrop: {
-                        position: { top: 0, left: 0 },
-                        size: { extraHeight: 500, extraWidth: 500 } // increase to taste
-                    }
-                }
-            });
-
-            webamp.renderWhenReady(document.getElementById("app"));
-
-            // Save playback position every few seconds
-            setInterval(() => {
-                const track = webamp.getCurrentTrack();
-                const time = webamp.audioManager?.getCurrentTime() || 0;
-                if (!track) return;
-                localStorage.setItem("lastTrack", JSON.stringify(track));
-                localStorage.setItem("lastTime", time);
-            }, 5000);
-
-            // Restore playback if available
-            window.addEventListener("load", () => {
-                const raw = localStorage.getItem("lastTrack");
-                const lastTime = parseFloat(localStorage.getItem("lastTime") || "0");
-                if (raw) {
-                    const saved = JSON.parse(raw);
-                    // match by url or title
-                    const matching = tracks.find(t => t.url === saved.url);
-                    if (matching) {
-                        setTimeout(() => {
-                            webamp.playTrack(matching);
-                            webamp.audioManager?.seek(lastTime);
-                        }, 2000);
-                    }
-                }
-            });
+        __butterchurnOptions: {
+          importButterchurn: () => Promise.resolve(window.butterchurn),
+          getPresets: () => {
+            const presets = window.butterchurnPresets.getPresets();
+            return Object.keys(presets).map(name => ({
+              name,
+              butterchurnPresetObject: presets[name]
+            }));
+          },
+          butterchurnOpen: true
+        },
+        windowLayout: {
+          main: { position: { top: 50, left: 50 } },
+          equalizer: { position: { top: 116, left: 0 } },
+          milkdrop: {
+            position: { top: 0, left: 0 },
+            size: { extraHeight: 500, extraWidth: 500 }
+          }
         }
+      });
 
-        initWebamp();
-    </script>
+      webamp.renderWhenReady(document.getElementById("app"));
+
+      // Resume AudioContext on first click
+      document.getElementById("app").addEventListener("click", () => {
+        webamp.audioManager?.resume();
+      });
+
+      // Save playback position every 5 seconds
+      setInterval(() => {
+        const track = webamp.audioManager.currentTrack;
+        const time = webamp.audioManager?.getCurrentTime() || 0;
+        if (!track) return;
+        localStorage.setItem("lastTrack", JSON.stringify(track));
+        localStorage.setItem("lastTime", time);
+      }, 5000);
+
+      // Restore playback on page load
+      const raw = localStorage.getItem("lastTrack");
+      const lastTime = parseFloat(localStorage.getItem("lastTime") || "0");
+      if (raw) {
+        const saved = JSON.parse(raw);
+        const matching = playlist.find(t => t.url === saved.url);
+        if (matching) {
+          setTimeout(() => {
+            webamp.playTrack(matching);
+            webamp.audioManager?.seek(lastTime);
+          }, 2000);
+        }
+      }
+    }
+
+    initWebamp();
+  </script>
 </body>
-
 </html>
