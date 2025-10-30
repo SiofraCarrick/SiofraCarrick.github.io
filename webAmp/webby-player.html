@@ -3,35 +3,189 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Totattly not allegal</title>
+  <title>Totattly not allegal</title>
 
   <style>
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
-      background-color: #fe00f2;
+      background-color: #008080;
       color: white;
       overflow: hidden;
+      font-family: 'MS Sans Serif', sans-serif;
     }
+    
     #app {
-      height: 100%;
+      height: calc(100% - 40px);
       width: 100%;
     }
+    
+    .taskbar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 40px;
+      background: #c0c0c0;
+      border-top: 2px outset #c0c0c0;
+      display: flex;
+      align-items: center;
+      padding: 0 8px;
+      box-sizing: border-box;
+    }
+    
+    .start-button {
+      height: 30px;
+      padding: 0 20px;
+      background: #c0c0c0;
+      border: 2px outset #c0c0c0;
+      font-size: 11px;
+      font-weight: normal;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      color: black;
+    }
+    
+    .start-button:active {
+      border: 2px inset #c0c0c0;
+    }
+    
+    .taskbar-items {
+      flex: 1;
+      margin-left: 10px;
+      display: flex;
+      gap: 4px;
+    }
+    
+    .taskbar-item {
+      height: 30px;
+      padding: 0 12px;
+      background: #c0c0c0;
+      border: 2px outset #c0c0c0;
+      font-size: 11px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      color: black;
+    }
+    
+    .taskbar-item:active {
+      border: 2px inset #c0c0c0;
+    }
+    
+    .system-tray {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: black;
+      font-size: 11px;
+    }
+    
+    .clock {
+      background: #c0c0c0;
+      border: 1px inset #808080;
+      padding: 4px 8px;
+      font-family: 'MS Sans Serif', sans-serif;
+    }
+    
+    .desktop-icon {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 64px;
+      height: 64px;
+      background: #c0c0c0;
+      border: 2px outset #c0c0c0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 10px;
+      color: black;
+    }
+    
+    .desktop-icon:active {
+      border: 2px inset #c0c0c0;
+    }
+
   </style>
 </head>
 <body>
   <div id="app"></div>
-    //brrrr
+  
+  <div class="desktop-icon" id="skin-icon">
+    <span style="font-size: 24px;">🎨</span>
+    <div>Skins</div>
+  </div>
+
+  
+  <div class="taskbar">
+    <div class="start-button"><span style="font-size: 18px;">⊞</span> Start</div>
+    <div class="taskbar-items">
+      <div class="taskbar-item"><span style="font-size: 18px;">♪</span> Webamp</div>
+      <div class="taskbar-item" id="save-btn"><span style="font-size: 18px;">💾</span> Save</div>
+      <div class="taskbar-item" id="jump-btn"><span style="font-size: 18px;">»</span> Jump</div>
+      <div class="taskbar-item" id="resume-btn"><span style="font-size: 18px;">►</span> Resume</div>
+      <div class="taskbar-item" id="auto-btn"><span style="font-size: 18px;">⚙</span> Auto</div>
+    </div>
+    <div class="system-tray">
+      <div class="clock" id="clock">12:00 PM</div>
+    </div>
+  </div>
+
+  //brrrr
   <script src="https://unpkg.com/webamp@2.2.0/built/webamp.bundle.min.js"></script>
   <script src="https://unpkg.com/butterchurn@2.6.7/lib/butterchurn.min.js"></script>
   <script src="https://unpkg.com/butterchurn-presets@2.4.7/lib/butterchurnPresets.min.js"></script>
 
   <script>
-        // Skin
-        //const skinUrl = "https://cdn.jsdelivr.net/gh/captbaritone/webamp@master/skins/base-2.91.wsz";
+    // 🕒 CLOCK
+    function updateClock() {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+      document.getElementById('clock').textContent = timeStr;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
 
-        // Fetch books.json and return a flattened playlist
+    // Skin
+    //const skinUrl = "https://cdn.jsdelivr.net/gh/captbaritone/webamp@master/skins/base-2.91.wsz";
+
+    // DEBUG MODE - uncomment to use test MP3 instead of books.json
+    
+    // async function loadPlaylist() {
+    //   console.log("📂 Loading playlist...");
+    //   const playlist = [
+    //     {
+    //       metaData: { artist: "Mark Twain", title: "Chapter 01-02" },
+    //       url: "https://archive.org/download/tom_sawyer_librivox/TSawyer_01-02_twain_64kb.mp3"
+    //     },
+    //     {
+    //       metaData: { artist: "Mark Twain", title: "Chapter 03-04" },
+    //       url: "https://archive.org/download/tom_sawyer_librivox/TSawyer_03-04_twain_64kb.mp3"
+    //     },
+    //     {
+    //       metaData: { artist: "Mark Twain", title: "Chapter 05-06" },
+    //       url: "https://archive.org/download/tom_sawyer_librivox/TSawyer_05-06_twain_64kb.mp3"
+    //     },
+    //     {
+    //       metaData: { artist: "Mark Twain", title: "Chapter 07-08" },
+    //       url: "https://archive.org/download/tom_sawyer_librivox/TSawyer_07-08_twain_64kb.mp3"
+    //     },
+    //     {
+    //       metaData: { artist: "Mark Twain", title: "Chapter 09-10" },
+    //       url: "https://archive.org/download/tom_sawyer_librivox/TSawyer_09-10_twain_64kb.mp3"
+    //     }
+    //   ];
+    //   console.log("✅ Playlist loaded:", playlist);
+    //   return playlist;
+    // }
+    
+    
+    // Fetch books.json and return a flattened playlist
     async function loadPlaylist() {
       try {
         const res = await fetch("./books.json");
@@ -59,12 +213,40 @@
       }
     }
 
+    let webampInstance = null;
+
     async function initWebamp() {
+      console.log("🚀 Starting initWebamp");
       const playlist = await loadPlaylist();
 
-      const webamp = new Webamp({
+      webampInstance = new Webamp({
         initialTracks: playlist,
-                // initialSkin: { url: skinUrl },
+        availableSkins: [
+          {
+            url: "https://archive.org/cors/winampskin_Zelda_Amp/Zelda-Amp.wsz",
+            name: "Zelda Amp",
+          },
+          {
+            url: "https://archive.org/cors/winampskin_Green-Dimension-V2/Green-Dimension-V2.wsz",
+            name: "Green Dimension V2",
+          },
+          {
+            url: "https://archive.org/cors/winampskin_mac_os_x_1_5-aqua/mac_os_x_1_5-aqua.wsz",
+            name: "Mac OSX v1.5 (Aqua)",
+          },
+          {
+            url: "https://archive.org/cors/winampskin_Rei_Ayanami_of_Evangelion/Rei_Ayanami_Version_2.wsz",
+            name: "Rei Ayanami Evangelion",
+          },
+          {
+            url: "https://archive.org/cors/winampskins_Serial_Experiments_Lain_Winamp_Skin/Serial_Experiments_Lain_Winamp_Skin.wsz",
+            name: "Serial Experiments Lain",
+          },
+          {
+            url: "https://archive.org/cors/winampskin_Old_Mac-OS/Old_Mac-OS.wsz",
+            name: "Old Mac OS",
+          },
+        ],
         __butterchurnOptions: {
           importButterchurn: () => Promise.resolve(window.butterchurn),
           getPresets: () => {
@@ -77,47 +259,136 @@
           butterchurnOpen: true
         },
         windowLayout: {
-          main: { position: { top: 50, left: 50 } },
-          equalizer: { position: { top: 116, left: 0 } },
-          milkdrop: {
-            position: { top: 0, left: 0 },
-            size: { extraHeight: 500, extraWidth: 500 }
+          main: { position: { top: 20, left: 20 } },
+          //equalizer: { position: { top: 136, left: 20 } },
+          playlist: { position: { top: 20, left: 295 }, size: { extraWidth: 400, extraHeight: 200 } },
+          milkdrop: { position: { top: 20, left: 720 }, size: { extraHeight: 400, extraWidth: 400 } }
+        }
+      });
+
+      await webampInstance.renderWhenReady(document.getElementById("app"));
+      console.log("🎨 Webamp rendered successfully");
+
+      // Load saved skin
+      setTimeout(() => {
+        const savedSkin = localStorage.getItem("lastSkin");
+        if (savedSkin) {
+          webampInstance.setSkinFromUrl(savedSkin);
+          console.log(`🎨 Loaded saved skin: ${savedSkin}`);
+        }
+      }, 1000);
+
+
+      let currentTrack = null;
+      webampInstance.onTrackDidChange((track) => {
+        currentTrack = track;
+      });
+
+      // 💾 SAVE
+      document.getElementById("save-btn").addEventListener("click", () => {
+        try {
+          const currentTime = webampInstance.media.timeElapsed();
+          if (currentTrack) {
+            localStorage.setItem("lastTrack", JSON.stringify(currentTrack));
+            localStorage.setItem("lastTime", currentTime.toString());
+            console.log(`💾 Saved: ${currentTrack.metaData?.title} at ${currentTime.toFixed(1)}s`);
           }
+        } catch (e) {
+          console.error("❌ Save error:", e);
         }
       });
 
-      webamp.renderWhenReady(document.getElementById("app"));
+      // ⏩ JUMP (loads saved track but doesn’t play or seek yet)
+      document.getElementById("jump-btn").addEventListener("click", () => {
+        const savedTrack = localStorage.getItem("lastTrack");
+        if (!savedTrack) return alert("No saved track!");
 
-      // Resume AudioContext on first click
-      document.getElementById("app").addEventListener("click", () => {
-        webamp.audioManager?.resume();
-      });
-
-      // Save playback position every 5 seconds
-      setInterval(() => {
-        const track = webamp.audioManager.currentTrack;
-        const time = webamp.audioManager?.getCurrentTime() || 0;
-        if (!track) return;
-        localStorage.setItem("lastTrack", JSON.stringify(track));
-        localStorage.setItem("lastTime", time);
-      }, 5000);
-
-      // Restore playback on page load
-      const raw = localStorage.getItem("lastTrack");
-      const lastTime = parseFloat(localStorage.getItem("lastTime") || "0");
-      if (raw) {
-        const saved = JSON.parse(raw);
+        const saved = JSON.parse(savedTrack);
         const matching = playlist.find(t => t.url === saved.url);
-        if (matching) {
-          setTimeout(() => {
-            webamp.playTrack(matching);
-            webamp.audioManager?.seek(lastTime);
-          }, 2000);
+        if (!matching) return alert("Saved track not found in playlist!");
+
+        const index = playlist.indexOf(matching);
+        webampInstance.setCurrentTrack(index);
+        console.log(`⏩ Jumped to saved track: ${matching.metaData.title}`);
+      });
+
+      // ▶️ RESUME (seek + play)
+      document.getElementById("resume-btn").addEventListener("click", () => {
+        const savedTime = parseFloat(localStorage.getItem("lastTime") || "0");
+        if (savedTime <= 0) return alert("No saved time!");
+        
+        webampInstance.seekToTime(savedTime);
+        console.log(`✅ Resumed at ${savedTime.toFixed(1)}s`);
+      });
+
+      // 🤖 AUTO (jump + wait 5s + resume)
+      document.getElementById("auto-btn").addEventListener("click", () => {
+        const savedTrack = localStorage.getItem("lastTrack");
+        const savedTime = parseFloat(localStorage.getItem("lastTime") || "0");
+        
+        if (!savedTrack) return alert("No saved track!");
+        if (savedTime <= 0) return alert("No saved time!");
+
+        const saved = JSON.parse(savedTrack);
+        const matching = playlist.find(t => t.url === saved.url);
+        if (!matching) return alert("Saved track not found in playlist!");
+
+        // Step 1: Jump to track
+        const index = playlist.indexOf(matching);
+        webampInstance.setCurrentTrack(index);
+        console.log(`⏩ Auto: Jumped to ${matching.metaData.title}`);
+        
+        // Step 2: Wait 5 seconds then resume
+        setTimeout(() => {
+          webampInstance.seekToTime(savedTime);
+          console.log(`✅ Auto: Resumed at ${savedTime.toFixed(1)}s`);
+        }, 5000);
+      });
+
+      // 🎨 DESKTOP SKIN ICON - cycles through available skins
+      const skinUrls = [
+        "https://archive.org/cors/winampskin_Rei_Ayanami_of_Evangelion/Rei_Ayanami_Version_2.wsz",
+        "https://archive.org/cors/winampskins_Serial_Experiments_Lain_Winamp_Skin/Serial_Experiments_Lain_Winamp_Skin.wsz",
+        "https://archive.org/cors/winampskin_Old_Mac-OS/Old_Mac-OS.wsz"
+      ];
+      
+      document.getElementById("skin-icon").addEventListener("click", () => {
+        const randomSkin = skinUrls[Math.floor(Math.random() * skinUrls.length)];
+        webampInstance.setSkinFromUrl(randomSkin);
+        localStorage.setItem("lastSkin", randomSkin);
+        console.log(`🎨 Applied skin: ${randomSkin}`);
+      });
+    }
+
+    initWebamp();
+  </script>
+</body>
+</html>aData.title}`);
+        
+        // Step 2: Wait 5 seconds then resume
+        setTimeout(() => {
+          webampInstance.seekToTime(savedTime);
+          console.log(`✅ Auto: Resumed at ${savedTime.toFixed(1)}s`);
+        }, 5000);
+      });
+
+      // 🎨 RANDOM SKIN
+      document.getElementById("skin-btn").addEventListener("click", async () => {
+        try {
+          const response = await fetch('https://api.webamp.org/skins/random');
+          const skinData = await response.json();
+          const skinUrl = `https://cdn.webamp.org/skins/${skinData.md5}.wsz`;
+          
+          webampInstance.setSkinFromUrl(skinUrl);
+          console.log(`🎨 Applied random skin: ${skinData.filename}`);
+        } catch (e) {
+          console.error('❌ Failed to load random skin:', e);
         }
-      }
+      });
     }
 
     initWebamp();
   </script>
 </body>
 </html>
+
